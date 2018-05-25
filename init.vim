@@ -72,6 +72,7 @@ nnoremap <leader>w :w<cr>
 inoremap <leader>w <esc>:w<cr>
 nnoremap <leader>q :q!<cr>
 nnoremap <leader>x :x<cr>
+nnoremap <a-q>u :qa!<cr>
 
 autocmd vimenter * :NERDTree
 autocmd vimenter * :Guifont Consolas:h12
