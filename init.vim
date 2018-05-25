@@ -4,7 +4,7 @@
 call plug#begin('~/.vim/plugged')
 	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 	Plug 'majutsushi/tagbar'
-	Plug 'NLKNguyen/copy-cut-paste.vim'
+	" Plug 'NLKNguyen/copy-cut-paste.vim'
 	Plug 'junegunn/fzf.vim'
 	Plug 'itchyny/lightline.vim'
 	Plug 'terryma/vim-multiple-cursors'
@@ -18,8 +18,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'pangloss/vim-javascript'
 	Plug 'kien/ctrlp.vim'
 	Plug 'me-vlad/spellfiles.vim'
+	Plug 'tmhedberg/matchit'
 call plug#end()
-
 
 " TEMPORARY OPRIONS, LATER SHOULD BE TRANSMITED TO THE RIGHT PLACE
 set path+=**
@@ -41,6 +41,9 @@ colorscheme dracula
 
 set foldmethod=marker
 
+set autoindent
+set smartindent
+
 " MAPPING =======================================================
 let mapleader = ","
 
@@ -59,28 +62,20 @@ nnoremap <leader>f gt
 nnoremap <leader>r :source %<cr>
 nnoremap <leader>c :source $myvimrc<cr>
 
+nmap <c-,> <c-y>,
+imap <c-,> <c-y>,jk
+
 nnoremap : ;
 nnoremap ; :
 
-nnoremap <c-h> <c-w>W
-nnoremap <c-l> <c-w>w
-
+nnoremap <leader>w :w<cr>
+inoremap <leader>w <esc>:w<cr>
+nnoremap <leader>q :q!<cr>
+nnoremap <leader>x :x<cr>
 
 autocmd vimenter * :NERDTree
 autocmd vimenter * :Guifont Consolas:h12
 
-" COPY-CUT-PASTE MAPS
-let g:copy_cut_paste_no_mappings = 1
-nnoremap <c-c> <Plug>CCP_CopyLine
-vnoremap <c-c> <Plug>CCP_CopyText
-
-nnoremap <c-x> <Plug>CCP_CutLine
-vnoremap <c-x> <Plug>CCP_CutText
-
-nnoremap <c-v> <Plug>CCP_PasteText
-
 " ABBREVIATIONS ==================================================
 iabbrev cnsl console.log(" ");<left><left><left><left>
 iabbrev <== <?= ?><left><left><left>
-
-" command! -nargs=? Guifont call rpcnotify(0, 'Gui', 'SetFont', "\<args\>) | let g:Guifont="<args>"
