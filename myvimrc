@@ -30,7 +30,7 @@ let vimrc=$myvimrc
 " end
 
 " OPTIONS ======================================================= 
-set relativenumber
+set norelativenumber
 set number
 set guifont=Consolas:h14
 set tabstop=4
@@ -80,3 +80,10 @@ autocmd vimenter * :Guifont Consolas:h12
 " ABBREVIATIONS ==================================================
 iabbrev cnsl console.log(" ");<left><left><left><left>
 iabbrev <== <?= ?><left><left><left>
+
+if has('nvim')
+	echo "this programm is NeoVim"
+	let g:hello = "hello, it works only in neovim"
+endif
+
+let g:vimrc = "~\\vim-configuration\\\.vimrc" 
