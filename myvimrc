@@ -74,9 +74,6 @@ nnoremap <leader>q :q!<cr>
 nnoremap <leader>x :x<cr>
 nnoremap <a-q>u :qa!<cr>
 
-autocmd vimenter * :NERDTree
-autocmd vimenter * :Guifont Consolas:h12
-
 " ABBREVIATIONS ==================================================
 iabbrev cnsl console.log(" ");<left><left><left><left>
 iabbrev <== <?= ?><left><left><left>
@@ -84,6 +81,9 @@ iabbrev <== <?= ?><left><left><left>
 if has('nvim')
 	echo "this programm is NeoVim"
 	let g:hello = "hello, it works only in neovim"
+
+	autocmd vimenter * :NERDTree
+	autocmd vimenter * :Guifont Consolas:h12
 endif
 
 let g:vimrc = "~\\vim-configuration\\\.vimrc" 
