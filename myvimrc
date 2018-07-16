@@ -19,6 +19,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'kien/ctrlp.vim'
 	Plug 'me-vlad/spellfiles.vim'
 	Plug 'tmhedberg/matchit'
+	" Plug 'alvan/vim-closetag'
+	Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 " TEMPORARY OPRIONS, LATER SHOULD BE TRANSMITED TO THE RIGHT PLACE
@@ -30,6 +32,7 @@ let vimrc=$myvimrc
 " end
 
 " OPTIONS ======================================================= 
+set encoding=UTF-8
 set norelativenumber
 set number
 set guifont=Consolas:h14
@@ -37,7 +40,6 @@ set tabstop=4
 set shiftwidth=4
 set noexpandtab
 set cursorline
-colorscheme dracula
 
 set foldmethod=marker
 
@@ -47,6 +49,7 @@ set smartindent
 " MAPPING =======================================================
 let mapleader = ","
 
+set scrolloff=7
 inoremap jk <esc>
 noremap <leader>q :q<cr>
 noremap <leader>x :x<cr>
@@ -74,16 +77,18 @@ nnoremap <leader>q :q!<cr>
 nnoremap <leader>x :x<cr>
 nnoremap <a-q>u :qa!<cr>
 
-autocmd vimenter * :NERDTree
-autocmd vimenter * :Guifont Consolas:h12
-
 " ABBREVIATIONS ==================================================
 iabbrev cnsl console.log(" ");<left><left><left><left>
 iabbrev <== <?= ?><left><left><left>
 
 if has('nvim')
-	echo "this programm is NeoVim"
-	let g:hello = "hello, it works only in neovim"
+	colorscheme dracula
+
+	autocmd vimenter * :cd ~
+	autocmd vimenter * :NERDTree
+	autocmd vimenter * :Guifont Consolas:h12
+	autocmd vimenter * :source $myvimrc
+	" source $myvimrc
 endif
 
-let g:vimrc = "~\\vim-configuration\\\.vimrc" 
+command! Vimrc tabe ~\vim-configuration\myvimrc
