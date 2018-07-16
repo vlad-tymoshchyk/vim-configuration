@@ -41,6 +41,8 @@ set shiftwidth=4
 set noexpandtab
 set cursorline
 
+set showmatch
+
 set foldmethod=marker
 
 set autoindent
@@ -51,6 +53,7 @@ let mapleader = ","
 
 set scrolloff=7
 inoremap jk <esc>
+inoremap ;; <esc>:
 noremap <leader>q :q<cr>
 noremap <leader>x :x<cr>
 " FUNCTIONAL KEYS
