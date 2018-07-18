@@ -4,54 +4,98 @@
 call plug#begin('~/.vim/plugged')
 	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 	Plug 'majutsushi/tagbar'
+	Plug 'vim-airline/vim-airline'
 	" Plug 'NLKNguyen/copy-cut-paste.vim'
 	Plug 'junegunn/fzf.vim'
 	Plug 'itchyny/lightline.vim'
-	Plug 'terryma/vim-multiple-cursors'
-	Plug 'danro/rename.vim'
+	" Plug 'terryma/vim-multiple-cursors'
+	" Plug 'danro/rename.vim'
 	Plug 'tpope/vim-surround'
-	Plug 'editorconfig/editorconfig-vim'
-	Plug 'mattn/emmet-vim'
-	Plug 'w0rp/ale'
+	" Plug 'editorconfig/editorconfig-vim'
+	" Plug 'mattn/emmet-vim'
+	" Plug 'w0rp/ale'
 	" Plug 'vim-gitgutter'
-	Plug 'vim-scripts/Vim-Support'
-	Plug 'pangloss/vim-javascript'
+	" Plug 'vim-scripts/Vim-Support'
+	" Plug 'pangloss/vim-javascript'
 	Plug 'kien/ctrlp.vim'
-	Plug 'me-vlad/spellfiles.vim'
-	Plug 'tmhedberg/matchit'
+	" Plug 'me-vlad/spellfiles.vim'
+	" Plug 'tmhedberg/matchit'
 	" Plug 'alvan/vim-closetag'
 	Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 " TEMPORARY OPRIONS, LATER SHOULD BE TRANSMITED TO THE RIGHT PLACE
 set path+=**
-let vimrc=$myvimrc
-
-
 
 " end
 
 " OPTIONS ======================================================= 
-set encoding=UTF-8
-set norelativenumber
-set number
-set guifont=Consolas:h14
+" [https://www.shortcutfoo.com/blog/top-50-vim-configuration-options/]
+" 	Indention =================
+set autoindent
+set smartindent
 set tabstop=4
 set shiftwidth=4
 set noexpandtab
+set nosmarttab
+
+"	Search ======================
+set hlsearch
+set ignorecase
+set incsearch
+set smartcase
+
+"	Persormance =================
+set lazyredraw
+
+"	Text rendering ==============
+set display+=lastline
+set encoding=utf-8
+set linebreak
+set scrolloff=7
+set sidescrolloff=5
+set wrap
+
+"	User interface ==============
+set laststatus=2
+set ruler
+set wildmenu
+set cursorline
+set number
+set norelativenumber
+set title
+set noerrorbells
+set novisualbell
+set mouse=a
+
+"	Code folding ================
+set foldmethod=indent
+set nofoldenable
+set foldnestmax=2
+
+"	Miscellaneous options =======
+set autoread
+set backupdir=~/.cache/vim
+set dir=~/.cache/vim
+set confirm
+set hidden
+set history=1000
+set noswapfile
+" set shell=powershell
+set spell
+;
+
+colorscheme desert
+set encoding=UTF-8
+set guifont=Consolas:h14
 set cursorline
 
-set showmatch
+set noshowmatch		" cursor no jumps to parent bracket
 
-set foldmethod=marker
-
-set autoindent
-set smartindent
 
 " MAPPING =======================================================
 let mapleader = ","
 
-set scrolloff=7
 inoremap jk <esc>
 inoremap ;; <esc>:
 noremap <leader>q :q<cr>
@@ -73,6 +117,8 @@ imap <c-,> <c-y>,jk
 
 nnoremap : ;
 nnoremap ; :
+vnoremap : ;
+vnoremap ; :
 
 nnoremap <leader>w :w<cr>
 inoremap <leader>w <esc>:w<cr>
@@ -84,14 +130,16 @@ nnoremap <a-q>u :qa!<cr>
 iabbrev cnsl console.log(" ");<left><left><left><left>
 iabbrev <== <?= ?><left><left><left>
 
+
+autocmd vimenter *.phtml :set filetype=html
+
 if has('nvim')
 	colorscheme dracula
 
 	autocmd vimenter * :cd ~
-	autocmd vimenter * :NERDTree
+	" autocmd vimenter * :NERDTree
 	autocmd vimenter * :Guifont Consolas:h12
-	autocmd vimenter * :source $myvimrc
-	" source $myvimrc
 endif
 
+" source ~\vimscripts\
 command! Vimrc tabe ~\vim-configuration\myvimrc
