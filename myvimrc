@@ -12,8 +12,8 @@ call plug#begin('~/.vim/plugged')
 	" Plug 'danro/rename.vim'
 	Plug 'tpope/vim-surround'
 	" Plug 'editorconfig/editorconfig-vim'
-	" Plug 'mattn/emmet-vim'
-	" Plug 'w0rp/ale'
+	Plug 'mattn/emmet-vim'
+	Plug 'w0rp/ale'
 	" Plug 'vim-gitgutter'
 	" Plug 'vim-scripts/Vim-Support'
 	" Plug 'pangloss/vim-javascript'
@@ -50,7 +50,7 @@ set lazyredraw
 
 "	Text rendering ==============
 set display+=lastline
-set encoding=utf-8
+set encoding=UTF-8
 set linebreak
 set scrolloff=7
 set sidescrolloff=5
@@ -98,6 +98,7 @@ let mapleader = ","
 
 inoremap jk <esc>
 inoremap ;; <esc>:
+nnoremap q :q<cr>
 noremap <leader>q :q<cr>
 noremap <leader>x :x<cr>
 " FUNCTIONAL KEYS
