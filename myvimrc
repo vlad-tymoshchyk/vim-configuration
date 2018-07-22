@@ -110,8 +110,16 @@ nnoremap <leader>d <c-w>w
 nnoremap <leader>a gT
 nnoremap <leader>f gt
 
+nnoremap <c-j> <c-w>W
+nnoremap <c-k> <c-w>w
+nnoremap <c-h> gT
+nnoremap <a-h> gT
+nnoremap <c-l> gt
+nnoremap <a-l> gt
+nnoremap <a-j> 8j
+nnoremap <a-k> 8k
+
 nnoremap <leader>r :source %<cr>
-nnoremap <leader>c :source $myvimrc<cr>
 
 nmap <c-,> <c-y>,
 imap <c-,> <c-y>,jk
@@ -131,16 +139,20 @@ nnoremap <a-q>u :qa!<cr>
 iabbrev cnsl console.log(" ");<left><left><left><left>
 iabbrev <== <?= ?><left><left><left>
 
+inoremap {<cr> {<cr>}<esc>O
+inoremap {{ {<cr><cr>}<esc>o
+inoremap {<space> {  }<left><left>
 
-autocmd vimenter *.phtml :set filetype=html
+autocmd BufNewFile *.phtml :set filetype=html
 
 if has('nvim')
 	colorscheme dracula
 
 	autocmd vimenter * :cd ~
 	" autocmd vimenter * :NERDTree
-	autocmd vimenter * :Guifont Consolas:h12
+	autocmd vimenter * :Guifont Consolas:h13
 endif
 
 " source ~\vimscripts\
 command! Vimrc tabe ~\vim-configuration\myvimrc
+command! Conf source $myvimrc
