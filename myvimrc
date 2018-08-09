@@ -3,6 +3,7 @@
 " adding plugins
 call plug#begin('~/.vim/plugged')
 	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+	Plug 'jistr/vim-nerdtree-tabs'
 	Plug 'majutsushi/tagbar'
 	Plug 'vim-airline/vim-airline'
 	" Plug 'NLKNguyen/copy-cut-paste.vim'
@@ -21,6 +22,8 @@ call plug#begin('~/.vim/plugged')
 	" Plug 'me-vlad/spellfiles.vim'
 	" Plug 'tmhedberg/matchit'
 	" Plug 'alvan/vim-closetag'
+	Plug 'cakebaker/scss-syntax.vim'
+	Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 	Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
@@ -69,7 +72,7 @@ set novisualbell
 set mouse=a
 
 "	Code folding ================
-set foldmethod=indent
+set foldmethod=marker
 set nofoldenable
 set foldnestmax=2
 
@@ -119,7 +122,7 @@ nnoremap <a-l> gt
 nnoremap <a-j> 8j
 nnoremap <a-k> 8k
 
-nnoremap <leader>r :source %<cr>
+nnoremap <leader>r :e %<cr>
 
 nmap <c-,> <c-y>,
 imap <c-,> <c-y>,jk
@@ -134,9 +137,14 @@ inoremap <leader>w <esc>:w<cr>
 nnoremap <leader>q :q!<cr>
 nnoremap <leader>x :x<cr>
 nnoremap <a-q>u :qa!<cr>
+nnoremap <space> i<space><esc>l
+nnoremap <enter> i<enter><esc>l
+nnoremap <backspace> i<backspace><esc>l
+nnoremap va ggVG
+nnoremap vc ggVG"+y
 
 " ABBREVIATIONS ==================================================
-iabbrev cnsl console.log(" ");<left><left><left><left>
+iabbrev cnsl console.log( );<left><left><left>
 iabbrev <== <?= ?><left><left><left>
 
 inoremap {<cr> {<cr>}<esc>O
@@ -151,6 +159,8 @@ if has('nvim')
 	autocmd vimenter * :cd ~
 	" autocmd vimenter * :NERDTree
 	autocmd vimenter * :Guifont Consolas:h13
+
+	tnoremap <a-j> <c-\><c-n><c-w>j
 endif
 
 " source ~\vimscripts\
