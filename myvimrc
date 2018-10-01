@@ -25,6 +25,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'cakebaker/scss-syntax.vim'
 	Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 	Plug 'ryanoasis/vim-devicons'
+	Plug 'maksimr/vim-jsbeautify'
 call plug#end()
 
 " TEMPORARY OPRIONS, LATER SHOULD BE TRANSMITED TO THE RIGHT PLACE
@@ -150,6 +151,9 @@ iabbrev <== <?= ?><left><left><left>
 inoremap {<cr> {<cr>}<esc>O
 inoremap {{ {<cr><cr>}<esc>o
 inoremap {<space> {  }<left><left>
+inoremap [<cr> [<cr>]<esc>O
+inoremap [[ [<cr><cr>]<esc>o
+inoremap [<space> [  ]<left><left>
 
 autocmd BufNewFile *.phtml :set filetype=html
 
@@ -158,7 +162,7 @@ if has('nvim')
 
 	autocmd vimenter * :cd ~
 	" autocmd vimenter * :NERDTree
-	autocmd vimenter * :Guifont Consolas:h13
+	autocmd vimenter * :Guifont Consolas:h14
 
 	tnoremap <a-j> <c-\><c-n><c-w>j
 	tnoremap <leader>s <c-\><c-n><c-w>h
@@ -170,3 +174,4 @@ endif
 " source ~\vimscripts\
 command! Vimrc tabe ~\vim-configuration\myvimrc
 command! Conf source $myvimrc
+command! Beautify call JsBeautify()
