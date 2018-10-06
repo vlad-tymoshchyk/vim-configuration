@@ -1,4 +1,4 @@
-" CONFIGURATION SETTINGS FOR NEOVIM
+" coNFIGURATION SETTINGS FOR NEOVIM
 
 " adding plugins
 call plug#begin('~/.vim/plugged')
@@ -23,7 +23,7 @@ call plug#begin('~/.vim/plugged')
 	" Plug 'tmhedberg/matchit'
 	" Plug 'alvan/vim-closetag'
 	Plug 'cakebaker/scss-syntax.vim'
-	Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+	" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 	Plug 'ryanoasis/vim-devicons'
 	Plug 'maksimr/vim-jsbeautify'
 call plug#end()
@@ -91,10 +91,11 @@ set spell
 
 colorscheme desert
 set encoding=UTF-8
-set guifont=Consolas:h14
+set guifont=Consolas:h15
 set cursorline
 
 set noshowmatch		" cursor no jumps to parent bracket
+set backspace=indent,eol,start
 
 
 " MAPPING =======================================================
@@ -111,14 +112,10 @@ noremap <F8> :TagbarToggle<cr>
 " navigation tabs/buffers
 nnoremap <leader>s <c-w>W
 nnoremap <leader>d <c-w>w
-nnoremap <leader>a gT
-nnoremap <leader>f gt
 
 nnoremap <c-j> <c-w>W
 nnoremap <c-k> <c-w>w
-nnoremap <c-h> gT
 nnoremap <a-h> gT
-nnoremap <c-l> gt
 nnoremap <a-l> gt
 nnoremap <a-j> 8j
 nnoremap <a-k> 8k
@@ -141,8 +138,10 @@ nnoremap <a-q>u :qa!<cr>
 nnoremap <space> i<space><esc>l
 nnoremap <enter> i<enter><esc>l
 nnoremap <backspace> i<backspace><esc>l
-nnoremap va ggVG
+nnoremap vv ggVG
 nnoremap vc ggVG"+y
+
+nnoremap <leader>bt :call JsBeautify()<cr>
 
 " ABBREVIATIONS ==================================================
 iabbrev cnsl console.log( );<left><left><left>
@@ -156,6 +155,8 @@ inoremap [[ [<cr><cr>]<esc>o
 inoremap [<space> [  ]<left><left>
 
 autocmd BufNewFile *.phtml :set filetype=html
+
+map <F5> :wall!<CR>:!sbcl --load foo.cl<CR><CR>
 
 if has('nvim')
 	colorscheme dracula
