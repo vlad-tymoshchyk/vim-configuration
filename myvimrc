@@ -103,7 +103,6 @@ let mapleader = ","
 
 inoremap jk <esc>
 inoremap ;; <esc>:
-nnoremap q :q<cr>
 noremap <leader>q :q<cr>
 noremap <leader>x :x<cr>
 " FUNCTIONAL KEYS
@@ -129,6 +128,11 @@ nnoremap : ;
 nnoremap ; :
 vnoremap : ;
 vnoremap ; :
+
+" nnoremap j gj
+" nnoremap k gk
+" inoremap j gj
+" inoremap k gk
 
 nnoremap <leader>w :w<cr>
 inoremap <leader>w <esc>:w<cr>
@@ -157,6 +161,9 @@ inoremap [<space> [  ]<left><left>
 autocmd BufNewFile *.phtml :set filetype=html
 
 map <F5> :wall!<CR>:!sbcl --load foo.cl<CR><CR>
+
+" SETTINGS
+nnoremap <c-s>w :set wrap!<cr>
 
 if has('nvim')
 	colorscheme dracula
