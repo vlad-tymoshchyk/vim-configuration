@@ -108,8 +108,8 @@ nnoremap q :q<cr>
 noremap <leader>q :q<cr>
 noremap <leader>x :x<cr>
 " FUNCTIONAL KEYS
-noremap <F7> :NERDTreeToggle<cr>
-noremap <F8> :TagbarToggle<cr>
+noremap <silent> <F7> :NERDTreeToggle<cr>
+noremap <silent> <F8> :TagbarToggle<cr>
 " navigation tabs/buffers
 nnoremap <leader>s <c-w>W
 nnoremap <leader>d <c-w>w
