@@ -1,4 +1,4 @@
-" coNFIGURATION SETTINGS FOR NEOVIM
+" CONFIGURATION SETTINGS FOR NEOVIM
 
 " adding plugins
 call plug#begin('~/.vim/plugged')
@@ -6,7 +6,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'jistr/vim-nerdtree-tabs'
 	Plug 'majutsushi/tagbar'
 	Plug 'vim-airline/vim-airline'
-	" Plug 'NLKNguyen/copy-cut-paste.vim'
+	Plug 'NLKNguyen/copy-cut-paste.vim'
 	Plug 'junegunn/fzf.vim'
 	Plug 'itchyny/lightline.vim'
 	" Plug 'terryma/vim-multiple-cursors'
@@ -29,6 +29,8 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 " TEMPORARY OPRIONS, LATER SHOULD BE TRANSMITED TO THE RIGHT PLACE
+set exrc
+set secure
 set path+=**
 
 " end
@@ -87,7 +89,6 @@ set history=1000
 set noswapfile
 " set shell=powershell
 set spell
-;
 
 colorscheme desert
 set encoding=UTF-8
@@ -173,6 +174,6 @@ if has('nvim')
 endif
 
 " source ~\vimscripts\
-command! Vimrc tabe ~\vim-configuration\myvimrc
-command! Conf source $myvimrc
+command! Vimrc tabe ~/vim-configuration/myvimrc
+command! Conf source ~/vim-configuration/myvimrc
 command! Beautify call JsBeautify()
