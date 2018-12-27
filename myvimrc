@@ -3,15 +3,18 @@
 " adding plugins
 call plug#begin('~/.vim/plugged')
 	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-	Plug 'jistr/vim-nerdtree-tabs'
+	Plug 'scrooloose/nerdcommenter'
+	Plug 'tpope/vim-surround'
+
+	Plug 'jceb/vim-orgmode'
+	" Plug 'jistr/vim-nerdtree-tabs'
 	Plug 'majutsushi/tagbar'
 	Plug 'vim-airline/vim-airline'
-	Plug 'NLKNguyen/copy-cut-paste.vim'
+ 	" Plug 'NLKNguyen/copy-cut-paste.vim'
 	Plug 'junegunn/fzf.vim'
 	Plug 'itchyny/lightline.vim'
 	" Plug 'terryma/vim-multiple-cursors'
 	" Plug 'danro/rename.vim'
-	Plug 'tpope/vim-surround'
 	" Plug 'editorconfig/editorconfig-vim'
 	Plug 'mattn/emmet-vim'
 	Plug 'w0rp/ale'
@@ -22,7 +25,7 @@ call plug#begin('~/.vim/plugged')
 	" Plug 'me-vlad/spellfiles.vim'
 	" Plug 'tmhedberg/matchit'
 	" Plug 'alvan/vim-closetag'
-	Plug 'cakebaker/scss-syntax.vim'
+ 	Plug 'cakebaker/scss-syntax.vim'
 	" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 	Plug 'ryanoasis/vim-devicons'
 	Plug 'maksimr/vim-jsbeautify'
@@ -108,6 +111,8 @@ nnoremap q :q<cr>
 noremap <leader>q :q<cr>
 noremap <leader>x :x<cr>
 " FUNCTIONAL KEYS
+noremap <silent> <F5> :Conf<cr>
+noremap <silent> <F6> :Vimrc<cr>
 noremap <silent> <F7> :NERDTreeToggle<cr>
 noremap <silent> <F8> :TagbarToggle<cr>
 " navigation tabs/buffers
