@@ -3,7 +3,9 @@
 " adding plugins
 call plug#begin('~/.vim/plugged')
 	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-	Plug 'jistr/vim-nerdtree-tabs'
+	Plug 'scrooloose/nerdcommenter'
+	Plug 'wellle/targets.vim'
+	" Plug 'jistr/vim-nerdtree-tabs'
 	Plug 'majutsushi/tagbar'
 	Plug 'vim-airline/vim-airline'
 	" Plug 'NLKNguyen/copy-cut-paste.vim'
@@ -14,7 +16,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'tpope/vim-surround'
 	" Plug 'editorconfig/editorconfig-vim'
 	Plug 'mattn/emmet-vim'
-	Plug 'w0rp/ale'
+	" Plug 'w0rp/ale'
 	" Plug 'vim-gitgutter'
 	" Plug 'vim-scripts/Vim-Support'
 	" Plug 'pangloss/vim-javascript'
@@ -26,6 +28,8 @@ call plug#begin('~/.vim/plugged')
 	" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 	Plug 'ryanoasis/vim-devicons'
 	Plug 'maksimr/vim-jsbeautify'
+	Plug 'editorconfig/editorconfig-vim'
+	Plug 'bkad/CamelCaseMotion'
 call plug#end()
 
 " TEMPORARY OPRIONS, LATER SHOULD BE TRANSMITED TO THE RIGHT PLACE
@@ -134,8 +138,10 @@ vnoremap ; :
 " inoremap j gj
 " inoremap k gk
 
-nnoremap <leader>w :w<cr>
-inoremap <leader>w <esc>:w<cr>
+" nnoremap <leader>w :w<cr>
+nnoremap <c-s> :w<cr>
+" inoremap <leader>w <esc>:w<cr>
+inoremap <c-s> <esc>:w<cr>
 nnoremap <leader>q :q!<cr>
 nnoremap <leader>x :x<cr>
 nnoremap <a-q>u :qa!<cr>
@@ -163,23 +169,60 @@ autocmd BufNewFile *.phtml :set filetype=html
 map <F5> :wall!<CR>:!sbcl --load foo.cl<CR><CR>
 
 " SETTINGS
-nnoremap <c-s>w :set wrap!<cr>
+"nnoremap <silent> <c-s>w :set wrap!<cr>
+"nnoremap <silent> <c-s>l :set list!<cr>
+"nnoremap <silent> <c-s>c :source $myvimrc<cr>
+"nnoremap <silent> <c-s>r :e %<cr>
+"nnoremap <silent> <c-s>vc tabe ~\vim-configuration\myvimrc<cr>
 
 if has('nvim')
 	colorscheme dracula
+	" Guifont Consolas:h14
 
-	autocmd vimenter * :cd ~
+	" autocmd vimenter * :cd ~
 	" autocmd vimenter * :NERDTree
-	autocmd vimenter * :Guifont Consolas:h14
+	" autocmd vimenter * :Guifont Consolas:h14
 
 	tnoremap <a-j> <c-\><c-n><c-w>j
 	tnoremap <leader>s <c-\><c-n><c-w>h
 	tnoremap <leader>d <c-\><c-n><c-w>l
 	tnoremap <esc> <c-\><c-n>
 	tnoremap jk <c-\><c-n>
+
+	let g:NERDTreeDirArrowExpandable = "▸"
+	let g:NERDTreeDirArrowCollapsible = "▾" 
 endif
 
 " source ~\vimscripts\
 command! Vimrc tabe ~\vim-configuration\myvimrc
 command! Conf source $myvimrc
 command! Beautify call JsBeautify()
+command! HtmlBeautify call HtmlBeautify()
+
+let g:NERDTreeWinPos = "right"
+let g:NERDTreeShowHidden = 1
+
+" Plugin CamelCaseMotion configuration
+
+call camelcasemotion#CreateMotionMappings('<leader>')
+
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+map <silent> ge <Plug>CamelCaseMotion_ge
+sunmap w
+sunmap b
+sunmap e
+sunmap ge
+
+omap <silent> iw <Plug>CamelCaseMotion_iw
+xmap <silent> iw <Plug>CamelCaseMotion_iw
+omap <silent> ib <Plug>CamelCaseMotion_ib
+xmap <silent> ib <Plug>CamelCaseMotion_ib
+omap <silent> ie <Plug>CamelCaseMotion_ie
+xmap <silent> ie <Plug>CamelCaseMotion_ie
+
+imap <silent> <S-Left> <C-o><Plug>CamelCaseMotion_b
+imap <silent> <S-Right> <C-o><Plug>CamelCaseMotion_w
+
+"" end Plugin CamelCaseMotion
