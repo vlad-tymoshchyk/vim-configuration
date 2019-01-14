@@ -29,7 +29,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'ryanoasis/vim-devicons'
 	Plug 'maksimr/vim-jsbeautify'
 	Plug 'editorconfig/editorconfig-vim'
-	Plug 'bkad/CamelCaseMotion'
+	" Plug 'bkad/CamelCaseMotion'
 call plug#end()
 
 " TEMPORARY OPRIONS, LATER SHOULD BE TRANSMITED TO THE RIGHT PLACE
@@ -85,8 +85,9 @@ set foldnestmax=2
 
 "	Miscellaneous options =======
 set autoread
-set backupdir=~/.cache/vim
-set dir=~/.cache/vim
+set backupdir=~/.vim/temp
+set directory=~/.vim/temp
+set undodir=~/.vim/temp
 set confirm
 set hidden
 set history=1000
@@ -139,9 +140,9 @@ vnoremap ; :
 " inoremap j gj
 " inoremap k gk
 
-" nnoremap <leader>w :w<cr>
+nnoremap <leader>w :w<cr>
 nnoremap <c-s> :w<cr>
-" inoremap <leader>w <esc>:w<cr>
+inoremap <leader>w <esc>:w<cr>
 inoremap <c-s> <esc>:w<cr>
 nnoremap <leader>q :q!<cr>
 nnoremap <leader>x :x<cr>
@@ -153,6 +154,7 @@ nnoremap vv ggVG
 nnoremap vc ggVG"+y
 
 nnoremap <leader>bt :call JsBeautify()<cr>
+nnoremap <leader>co oconsole.log();<esc><left>i
 
 " ABBREVIATIONS ==================================================
 iabbrev cnsl console.log( );<left><left><left>
@@ -178,6 +180,7 @@ map <F5> :wall!<CR>:!sbcl --load foo.cl<CR><CR>
 
 if has('nvim')
 	colorscheme dracula
+	autocmd VimEnter :Guifont Consolas:h15
 	" Guifont Consolas:h14
 
 	" autocmd vimenter * :cd ~
@@ -205,25 +208,25 @@ let g:NERDTreeShowHidden = 1
 
 " Plugin CamelCaseMotion configuration
 
-call camelcasemotion#CreateMotionMappings('<leader>')
+"call camelcasemotion#CreateMotionMappings('<leader>')
 
-map <silent> w <Plug>CamelCaseMotion_w
-map <silent> b <Plug>CamelCaseMotion_b
-map <silent> e <Plug>CamelCaseMotion_e
-map <silent> ge <Plug>CamelCaseMotion_ge
-sunmap w
-sunmap b
-sunmap e
-sunmap ge
+"map <silent> w <Plug>CamelCaseMotion_w
+"map <silent> b <Plug>CamelCaseMotion_b
+"map <silent> e <Plug>CamelCaseMotion_e
+"map <silent> ge <Plug>CamelCaseMotion_ge
+"sunmap w
+"sunmap b
+"sunmap e
+"sunmap ge
 
-omap <silent> iw <Plug>CamelCaseMotion_iw
-xmap <silent> iw <Plug>CamelCaseMotion_iw
-omap <silent> ib <Plug>CamelCaseMotion_ib
-xmap <silent> ib <Plug>CamelCaseMotion_ib
-omap <silent> ie <Plug>CamelCaseMotion_ie
-xmap <silent> ie <Plug>CamelCaseMotion_ie
+"omap <silent> iw <Plug>CamelCaseMotion_iw
+"xmap <silent> iw <Plug>CamelCaseMotion_iw
+"omap <silent> ib <Plug>CamelCaseMotion_ib
+"xmap <silent> ib <Plug>CamelCaseMotion_ib
+"omap <silent> ie <Plug>CamelCaseMotion_ie
+"xmap <silent> ie <Plug>CamelCaseMotion_ie
 
-imap <silent> <S-Left> <C-o><Plug>CamelCaseMotion_b
-imap <silent> <S-Right> <C-o><Plug>CamelCaseMotion_w
+"imap <silent> <S-Left> <C-o><Plug>CamelCaseMotion_b
+"imap <silent> <S-Right> <C-o><Plug>CamelCaseMotion_w
 
 "" end Plugin CamelCaseMotion
