@@ -29,7 +29,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'ryanoasis/vim-devicons'
 	Plug 'maksimr/vim-jsbeautify'
 	Plug 'editorconfig/editorconfig-vim'
-	Plug 'bkad/CamelCaseMotion'
+	" Plug 'bkad/CamelCaseMotion'
 call plug#end()
 
 " TEMPORARY OPRIONS, LATER SHOULD BE TRANSMITED TO THE RIGHT PLACE
@@ -44,9 +44,9 @@ set path+=**
 " 	Indention =================
 set autoindent
 set smartindent
-set tabstop=4
-set shiftwidth=4
-set noexpandtab
+set tabstop=2
+set shiftwidth=2
+set expandtab
 set nosmarttab
 
 "	Search ======================
@@ -117,12 +117,10 @@ noremap <silent> <F8> :TagbarToggle<cr>
 nnoremap <leader>s <c-w>W
 nnoremap <leader>d <c-w>w
 
-nnoremap <c-j> <c-w>W
-nnoremap <c-k> <c-w>w
-nnoremap <a-h> gT
-nnoremap <a-l> gt
-nnoremap <a-j> 8j
-nnoremap <a-k> 8k
+nnoremap <silent> <c-j> <c-w>W
+nnoremap <silent> <c-k> <c-w>w
+nnoremap <silent> <a-h> gT
+nnoremap <silent> <a-l> gt
 
 nnoremap <leader>r :e %<cr>
 
@@ -139,9 +137,9 @@ vnoremap ; :
 " inoremap j gj
 " inoremap k gk
 
-" nnoremap <leader>w :w<cr>
+nnoremap <leader>w :w<cr>
 nnoremap <c-s> :w<cr>
-" inoremap <leader>w <esc>:w<cr>
+inoremap <leader>w <esc>:w<cr>
 inoremap <c-s> <esc>:w<cr>
 nnoremap <leader>q :q!<cr>
 nnoremap <leader>x :x<cr>
@@ -205,25 +203,30 @@ let g:NERDTreeShowHidden = 1
 
 " Plugin CamelCaseMotion configuration
 
-call camelcasemotion#CreateMotionMappings('<leader>')
+" call camelcasemotion#CreateMotionMappings('<leader>')
 
-map <silent> w <Plug>CamelCaseMotion_w
-map <silent> b <Plug>CamelCaseMotion_b
-map <silent> e <Plug>CamelCaseMotion_e
-map <silent> ge <Plug>CamelCaseMotion_ge
-sunmap w
-sunmap b
-sunmap e
-sunmap ge
+" map <silent> w <Plug>CamelCaseMotion_w
+" map <silent> b <Plug>CamelCaseMotion_b
+" map <silent> e <Plug>CamelCaseMotion_e
+" map <silent> ge <Plug>CamelCaseMotion_ge
+" sunmap w
+" sunmap b
+" sunmap e
+" sunmap ge
 
-omap <silent> iw <Plug>CamelCaseMotion_iw
-xmap <silent> iw <Plug>CamelCaseMotion_iw
-omap <silent> ib <Plug>CamelCaseMotion_ib
-xmap <silent> ib <Plug>CamelCaseMotion_ib
-omap <silent> ie <Plug>CamelCaseMotion_ie
-xmap <silent> ie <Plug>CamelCaseMotion_ie
+" omap <silent> iw <Plug>CamelCaseMotion_iw
+" xmap <silent> iw <Plug>CamelCaseMotion_iw
+" omap <silent> ib <Plug>CamelCaseMotion_ib
+" xmap <silent> ib <Plug>CamelCaseMotion_ib
+" omap <silent> ie <Plug>CamelCaseMotion_ie
+" xmap <silent> ie <Plug>CamelCaseMotion_ie
 
-imap <silent> <S-Left> <C-o><Plug>CamelCaseMotion_b
-imap <silent> <S-Right> <C-o><Plug>CamelCaseMotion_w
+" imap <silent> <S-Left> <C-o><Plug>CamelCaseMotion_b
+" imap <silent> <S-Right> <C-o><Plug>CamelCaseMotion_w
 
 "" end Plugin CamelCaseMotion
+
+au BufNewFile,BufRead *.vladsyntax  setf vladsyntax
+au BufNewFile,BufRead *.vladjs  setf vladjs
+
+syn keyword customKeywords console.log
