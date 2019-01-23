@@ -6,7 +6,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'scrooloose/nerdcommenter'
 	Plug 'wellle/targets.vim'
 	" Plug 'jistr/vim-nerdtree-tabs'
-	Plug 'majutsushi/tagbar'
+	" Plug 'majutsushi/tagbar'
 	Plug 'vim-airline/vim-airline'
 	Plug 'NLKNguyen/copy-cut-paste.vim'
 	Plug 'junegunn/fzf.vim'
@@ -30,6 +30,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'maksimr/vim-jsbeautify'
 	Plug 'editorconfig/editorconfig-vim'
 	" Plug 'bkad/CamelCaseMotion'
+	Plug 'pangloss/vim-javascript'
 call plug#end()
 
 " TEMPORARY OPRIONS, LATER SHOULD BE TRANSMITED TO THE RIGHT PLACE
@@ -180,6 +181,9 @@ map <F5> :wall!<CR>:!sbcl --load foo.cl<CR><CR>
 
 if has('nvim')
 	colorscheme dracula
+	if has('win32')
+		se shell=powershell.exe
+	endif
 	autocmd VimEnter :Guifont Consolas:h15
 	" Guifont Consolas:h14
 
@@ -187,14 +191,39 @@ if has('nvim')
 	" autocmd vimenter * :NERDTree
 	" autocmd vimenter * :Guifont Consolas:h14
 
-	tnoremap <a-j> <c-\><c-n><c-w>j
-	tnoremap <leader>s <c-\><c-n><c-w>h
-	tnoremap <leader>d <c-\><c-n><c-w>l
+	tnoremap <a-h> <c-\><c-n>gT
+	tnoremap <a-l> <c-\><c-n>gt
+	tnoremap <leader>s <c-\><c-n><c-w>W
+	tnoremap <leader>d <c-\><c-n><c-w>w
 	tnoremap <esc> <c-\><c-n>
 	tnoremap jk <c-\><c-n>
 
+	let g:terminal_color_0  = '#2e3436'
+	let g:terminal_color_1  = '#cc0000'
+	let g:terminal_color_2  = '#4e9a06'
+	let g:terminal_color_3  = '#c4a000'
+	let g:terminal_color_4  = '#3465a4'
+	let g:terminal_color_5  = '#75507b'
+	let g:terminal_color_6  = '#0b939b'
+	let g:terminal_color_7  = '#d3d7cf'
+	let g:terminal_color_8  = '#555753'
+	let g:terminal_color_9  = '#ef2929'
+	let g:terminal_color_10 = '#8ae234'
+	let g:terminal_color_11 = '#fce94f'
+	let g:terminal_color_12 = '#729fcf'
+	let g:terminal_color_13 = '#ad7fa8'
+	let g:terminal_color_14 = '#00f5e9'
+	let g:terminal_color_15 = '#eeeeec'
+
 	let g:NERDTreeDirArrowExpandable = "▸"
 	let g:NERDTreeDirArrowCollapsible = "▾" 
+
+	function! CheckIfTerminal()
+		if &buftype ==# 'terminal'
+			normal i
+		endif
+	endfunction
+	au! BufEnter * :call CheckIfTerminal()
 endif
 
 " source ~\vimscripts\
@@ -202,6 +231,7 @@ command! Vimrc tabe ~/vim-configuration/myvimrc
 command! Conf source ~/vim-configuration/myvimrc
 command! Beautify call JsBeautify()
 command! HtmlBeautify call HtmlBeautify()
+command! Font Guifont Consolas:h15
 
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeShowHidden = 1
@@ -230,3 +260,11 @@ let g:NERDTreeShowHidden = 1
 "imap <silent> <S-Right> <C-o><Plug>CamelCaseMotion_w
 
 "" end Plugin CamelCaseMotion
+
+" Syntax hightlighting
+"syn clear
+"hi shouldOutline guibg=#ffffff guifg=#000000 gui=bold
+"syn keyword shouldOutline console log TODO NOTE
+
+
+
