@@ -6,7 +6,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'scrooloose/nerdcommenter'
 	Plug 'wellle/targets.vim'
 	" Plug 'jistr/vim-nerdtree-tabs'
-	Plug 'majutsushi/tagbar'
+	" Plug 'majutsushi/tagbar'
 	Plug 'vim-airline/vim-airline'
 	Plug 'NLKNguyen/copy-cut-paste.vim'
 	Plug 'junegunn/fzf.vim'
@@ -30,8 +30,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'maksimr/vim-jsbeautify'
 	Plug 'editorconfig/editorconfig-vim'
 	" Plug 'bkad/CamelCaseMotion'
-
-  Plug 'morhetz/gruvbox'
+  	Plug 'morhetz/gruvbox'
+	Plug 'pangloss/vim-javascript'
 call plug#end()
 
 " TEMPORARY OPRIONS, LATER SHOULD BE TRANSMITED TO THE RIGHT PLACE
@@ -87,8 +87,9 @@ set foldnestmax=2
 
 "	Miscellaneous options =======
 set autoread
-set backupdir=~/.cache/vim
-set dir=~/.cache/vim
+set backupdir=~/.vim/temp
+set directory=~/.vim/temp
+set undodir=~/.vim/temp
 set confirm
 set hidden
 set history=1000
@@ -153,6 +154,7 @@ nnoremap vv ggVG
 nnoremap vc ggVG"+y
 
 nnoremap <leader>bt :call JsBeautify()<cr>
+nnoremap <leader>co oconsole.log();<esc><left>i
 
 " ABBREVIATIONS ==================================================
 iabbrev cnsl console.log( );<left><left><left>
@@ -181,20 +183,49 @@ map <F5> :wall!<CR>:!sbcl --load foo.cl<CR><CR>
 
 if has('nvim')
 	colorscheme dracula
+	if has('win32')
+		se shell=powershell.exe
+	endif
+	autocmd VimEnter :Guifont Consolas:h15
 	" Guifont Consolas:h14
 
 	" autocmd vimenter * :cd ~
 	" autocmd vimenter * :NERDTree
 	" autocmd vimenter * :Guifont Consolas:h14
 
-	tnoremap <a-j> <c-\><c-n><c-w>j
-	tnoremap <leader>s <c-\><c-n><c-w>h
-	tnoremap <leader>d <c-\><c-n><c-w>l
+	tnoremap <a-h> <c-\><c-n>gT
+	tnoremap <a-l> <c-\><c-n>gt
+	tnoremap <leader>s <c-\><c-n><c-w>W
+	tnoremap <leader>d <c-\><c-n><c-w>w
 	tnoremap <esc> <c-\><c-n>
 	tnoremap jk <c-\><c-n>
 
+	let g:terminal_color_0  = '#2e3436'
+	let g:terminal_color_1  = '#cc0000'
+	let g:terminal_color_2  = '#4e9a06'
+	let g:terminal_color_3  = '#c4a000'
+	let g:terminal_color_4  = '#3465a4'
+	let g:terminal_color_5  = '#75507b'
+	let g:terminal_color_6  = '#0b939b'
+	let g:terminal_color_7  = '#d3d7cf'
+	let g:terminal_color_8  = '#555753'
+	let g:terminal_color_9  = '#ef2929'
+	let g:terminal_color_10 = '#8ae234'
+	let g:terminal_color_11 = '#fce94f'
+	let g:terminal_color_12 = '#729fcf'
+	let g:terminal_color_13 = '#ad7fa8'
+	let g:terminal_color_14 = '#00f5e9'
+	let g:terminal_color_15 = '#eeeeec'
+
 	let g:NERDTreeDirArrowExpandable = "▸"
 	let g:NERDTreeDirArrowCollapsible = "▾" 
+
+	function! CheckIfTerminal()
+		if &buftype ==# 'terminal'
+			normal i
+		endif
+	endfunction
+	au! BufEnter * :call CheckIfTerminal()
 endif
 
 " source ~\vimscripts\
@@ -202,36 +233,21 @@ command! Vimrc tabe ~/vim-configuration/myvimrc
 command! Conf source ~/vim-configuration/myvimrc
 command! Beautify call JsBeautify()
 command! HtmlBeautify call HtmlBeautify()
+command! Font Guifont Consolas:h15
 
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeShowHidden = 1
-
-" Plugin CamelCaseMotion configuration
-
-" call camelcasemotion#CreateMotionMappings('<leader>')
-
-" map <silent> w <Plug>CamelCaseMotion_w
-" map <silent> b <Plug>CamelCaseMotion_b
-" map <silent> e <Plug>CamelCaseMotion_e
-" map <silent> ge <Plug>CamelCaseMotion_ge
-" sunmap w
-" sunmap b
-" sunmap e
-" sunmap ge
-
-" omap <silent> iw <Plug>CamelCaseMotion_iw
-" xmap <silent> iw <Plug>CamelCaseMotion_iw
-" omap <silent> ib <Plug>CamelCaseMotion_ib
-" xmap <silent> ib <Plug>CamelCaseMotion_ib
-" omap <silent> ie <Plug>CamelCaseMotion_ie
-" xmap <silent> ie <Plug>CamelCaseMotion_ie
-
-" imap <silent> <S-Left> <C-o><Plug>CamelCaseMotion_b
-" imap <silent> <S-Right> <C-o><Plug>CamelCaseMotion_w
-
-"" end Plugin CamelCaseMotion
 
 au BufNewFile,BufRead *.vladsyntax  setf vladsyntax
 au BufNewFile,BufRead *.vladjs  setf vladjs
 
 syn keyword customKeywords console.log
+
+" end Plugin CamelCaseMotion
+
+" Syntax hightlighting
+"syn clear
+"hi shouldOutline guibg=#ffffff guifg=#000000 gui=bold
+"syn keyword shouldOutline console log TODO NOTE
+
+
