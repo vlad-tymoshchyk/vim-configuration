@@ -30,6 +30,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'maksimr/vim-jsbeautify'
 	Plug 'editorconfig/editorconfig-vim'
 	" Plug 'bkad/CamelCaseMotion'
+
+  Plug 'morhetz/gruvbox'
 call plug#end()
 
 " TEMPORARY OPRIONS, LATER SHOULD BE TRANSMITED TO THE RIGHT PLACE
@@ -162,6 +164,9 @@ inoremap {<space> {  }<left><left>
 inoremap [<cr> [<cr>]<esc>O
 inoremap [[ [<cr><cr>]<esc>o
 inoremap [<space> [  ]<left><left>
+inoremap (<cr> (<cr>)<esc>O
+inoremap (( (<cr><cr>)<esc>o
+inoremap (<space> (  )<left><left>
 
 autocmd BufNewFile *.phtml :set filetype=html
 
