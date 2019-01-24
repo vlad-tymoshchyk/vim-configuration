@@ -30,7 +30,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'maksimr/vim-jsbeautify'
 	Plug 'editorconfig/editorconfig-vim'
 	" Plug 'bkad/CamelCaseMotion'
-  	Plug 'morhetz/gruvbox'
+  Plug 'morhetz/gruvbox'
 	Plug 'pangloss/vim-javascript'
 call plug#end()
 
@@ -181,6 +181,9 @@ map <F5> :wall!<CR>:!sbcl --load foo.cl<CR><CR>
 "nnoremap <silent> <c-s>r :e %<cr>
 "nnoremap <silent> <c-s>vc tabe ~\vim-configuration\myvimrc<cr>
 
+
+cnoremap jk <esc>
+
 if has('nvim')
 	colorscheme dracula
 	if has('win32')
@@ -199,6 +202,7 @@ if has('nvim')
 	tnoremap <leader>d <c-\><c-n><c-w>w
 	tnoremap <esc> <c-\><c-n>
 	tnoremap jk <c-\><c-n>
+	tnoremap <leader>q <esc>:q<cr>
 
 	let g:terminal_color_0  = '#2e3436'
 	let g:terminal_color_1  = '#cc0000'
@@ -220,12 +224,8 @@ if has('nvim')
 	let g:NERDTreeDirArrowExpandable = "▸"
 	let g:NERDTreeDirArrowCollapsible = "▾" 
 
-	function! CheckIfTerminal()
-		if &buftype ==# 'terminal'
-			normal i
-		endif
-	endfunction
-	au! BufEnter * :call CheckIfTerminal()
+	au! BufEnter *powershell.exe startinsert
+	au! TermOpen * setl nonumber foldcolumn=3
 endif
 
 " source ~\vimscripts\
