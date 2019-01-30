@@ -95,7 +95,7 @@ set hidden
 set history=1000
 set noswapfile
 " set shell=powershell
-set spell
+set nospell
 
 colorscheme desert
 set encoding=UTF-8
@@ -154,7 +154,7 @@ nnoremap vv ggVG
 nnoremap vc ggVG"+y
 
 nnoremap <leader>bt :call JsBeautify()<cr>
-nnoremap <leader>co oconsole.log();<esc><left>i
+nnoremap <leader>co Oconsole.log();<esc><left>i
 
 " ABBREVIATIONS ==================================================
 iabbrev cnsl console.log( );<left><left><left>
@@ -270,5 +270,4 @@ syn keyword customKeywords console.log
 "syn keyword shouldOutline console log TODO NOTE
 autocmd BufEnter *powershell.exe highlight Normal ctermbg=black
 autocmd BufLeave *powershell.exe highlight Normal ctermbg=white
-
 
