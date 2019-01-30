@@ -7,7 +7,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'wellle/targets.vim'
 	" Plug 'jistr/vim-nerdtree-tabs'
 	" Plug 'majutsushi/tagbar'
-	Plug 'vim-airline/vim-airline'
+	"Plug 'vim-airline/vim-airline'
 	Plug 'NLKNguyen/copy-cut-paste.vim'
 	Plug 'junegunn/fzf.vim'
 	Plug 'itchyny/lightline.vim'
@@ -202,7 +202,7 @@ if has('nvim')
 	tnoremap <leader>d <c-\><c-n><c-w>w
 	tnoremap <esc> <c-\><c-n>
 	tnoremap jk <c-\><c-n>
-	tnoremap <leader>q <esc>:q<cr>
+	tnoremap <leader>q <c-\><c-n>:q<cr>
 
 	let g:terminal_color_0  = '#2e3436'
 	let g:terminal_color_1  = '#cc0000'
@@ -224,8 +224,27 @@ if has('nvim')
 	let g:NERDTreeDirArrowExpandable = "▸"
 	let g:NERDTreeDirArrowCollapsible = "▾" 
 
-	au! BufEnter *powershell.exe startinsert
-	au! TermOpen * setl nonumber foldcolumn=3
+	au! TermOpen * call CustomizeAfterTermOpen()
+  au! BufEnter *powershell.exe call CustomizeAfterTermEnter()
+  au! BufLeave *powershell.exe call CustomizeAfterTermLeave()
+
+  let g:storedScrollOff=&scrolloff
+
+  function! CustomizeAfterTermOpen()
+    se nonumber
+    se foldcolumn=3
+    se nospell
+    syn region Search start=/PS/ end=/>/
+    start
+  endfunction
+  function! CustomizeAfterTermEnter()
+    start
+    se scrolloff=0
+  endfunction
+  function! CustomizeAfterTermLeave()
+    let &scrolloff=g:storedScrollOff
+  endfunction
+
 endif
 
 " source ~\vimscripts\
@@ -249,5 +268,7 @@ syn keyword customKeywords console.log
 "syn clear
 "hi shouldOutline guibg=#ffffff guifg=#000000 gui=bold
 "syn keyword shouldOutline console log TODO NOTE
+autocmd BufEnter *powershell.exe highlight Normal ctermbg=black
+autocmd BufLeave *powershell.exe highlight Normal ctermbg=white
 
 
