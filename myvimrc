@@ -90,12 +90,12 @@ set autoread
 set backupdir=~/.vim/temp
 set directory=~/.vim/temp
 set undodir=~/.vim/temp
+set nowritebackup
 set confirm
 set hidden
 set history=1000
 set noswapfile
-" set shell=powershell
-set spell
+set nospell
 
 colorscheme desert
 set encoding=UTF-8
@@ -242,6 +242,7 @@ au BufNewFile,BufRead *.vladsyntax  setf vladsyntax
 au BufNewFile,BufRead *.vladjs  setf vladjs
 
 syn keyword customKeywords console.log
+syn region Search start=/console/ end=/;/
 
 " end Plugin CamelCaseMotion
 
