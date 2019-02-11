@@ -7,7 +7,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'wellle/targets.vim'
 	" Plug 'jistr/vim-nerdtree-tabs'
 	" Plug 'majutsushi/tagbar'
-	Plug 'vim-airline/vim-airline'
+	"Plug 'vim-airline/vim-airline'
 	Plug 'NLKNguyen/copy-cut-paste.vim'
 	Plug 'junegunn/fzf.vim'
 	Plug 'itchyny/lightline.vim'
@@ -30,8 +30,9 @@ call plug#begin('~/.vim/plugged')
 	Plug 'maksimr/vim-jsbeautify'
 	Plug 'editorconfig/editorconfig-vim'
 	" Plug 'bkad/CamelCaseMotion'
-  	Plug 'morhetz/gruvbox'
+  Plug 'morhetz/gruvbox'
 	Plug 'pangloss/vim-javascript'
+  Plug 'digitaltoad/vim-pug'
 call plug#end()
 
 " TEMPORARY OPRIONS, LATER SHOULD BE TRANSMITED TO THE RIGHT PLACE
@@ -95,9 +96,9 @@ set confirm
 set hidden
 set history=1000
 set noswapfile
+" set shell=powershell
 set nospell
 
-colorscheme desert
 set encoding=UTF-8
 set guifont=Consolas:h15
 set cursorline
@@ -154,7 +155,7 @@ nnoremap vv ggVG
 nnoremap vc ggVG"+y
 
 nnoremap <leader>bt :call JsBeautify()<cr>
-nnoremap <leader>co oconsole.log();<esc><left>i
+nnoremap <leader>co Oconsole.log();<esc><left>i
 
 " ABBREVIATIONS ==================================================
 iabbrev cnsl console.log( );<left><left><left>
@@ -181,6 +182,9 @@ map <F5> :wall!<CR>:!sbcl --load foo.cl<CR><CR>
 "nnoremap <silent> <c-s>r :e %<cr>
 "nnoremap <silent> <c-s>vc tabe ~\vim-configuration\myvimrc<cr>
 
+
+cnoremap jk <esc>
+
 if has('nvim')
 	colorscheme dracula
 	if has('win32')
@@ -199,6 +203,7 @@ if has('nvim')
 	tnoremap <leader>d <c-\><c-n><c-w>w
 	tnoremap <esc> <c-\><c-n>
 	tnoremap jk <c-\><c-n>
+	tnoremap <leader>q <c-\><c-n>:q<cr>
 
 	let g:terminal_color_0  = '#2e3436'
 	let g:terminal_color_1  = '#cc0000'
@@ -220,12 +225,27 @@ if has('nvim')
 	let g:NERDTreeDirArrowExpandable = "▸"
 	let g:NERDTreeDirArrowCollapsible = "▾" 
 
-	function! CheckIfTerminal()
-		if &buftype ==# 'terminal'
-			normal i
-		endif
-	endfunction
-	au! BufEnter * :call CheckIfTerminal()
+	au! TermOpen * call CustomizeAfterTermOpen()
+  au! BufEnter *powershell.exe call CustomizeAfterTermEnter()
+  au! BufLeave *powershell.exe call CustomizeAfterTermLeave()
+
+  let g:storedScrollOff=&scrolloff
+
+  function! CustomizeAfterTermOpen()
+    se nonumber
+    se foldcolumn=3
+    se nospell
+    syn region Search start=/PS/ end=/>/
+    start
+  endfunction
+  function! CustomizeAfterTermEnter()
+    start
+    se scrolloff=0
+  endfunction
+  function! CustomizeAfterTermLeave()
+    let &scrolloff=g:storedScrollOff
+  endfunction
+
 endif
 
 " source ~\vimscripts\
@@ -250,5 +270,6 @@ syn region Search start=/console/ end=/;/
 "syn clear
 "hi shouldOutline guibg=#ffffff guifg=#000000 gui=bold
 "syn keyword shouldOutline console log TODO NOTE
-
+autocmd BufEnter *powershell.exe highlight Normal ctermbg=black
+autocmd BufLeave *powershell.exe highlight Normal ctermbg=white
 
