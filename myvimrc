@@ -33,6 +33,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'morhetz/gruvbox'
 	Plug 'pangloss/vim-javascript'
   Plug 'digitaltoad/vim-pug'
+  Plug 'leafgarland/typescript-vim'
+  Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 " TEMPORARY OPRIONS, LATER SHOULD BE TRANSMITED TO THE RIGHT PLACE
@@ -155,7 +157,8 @@ nnoremap vv ggVG
 nnoremap vc ggVG"+y
 
 nnoremap <leader>bt :call JsBeautify()<cr>
-nnoremap <leader>co Oconsole.log();<esc><left>i
+nnoremap <leader>co oconsole.log();<esc><left>i
+inoremap <leader>co console.log();<esc><left>i
 
 " ABBREVIATIONS ==================================================
 iabbrev cnsl console.log( );<left><left><left>
