@@ -23,7 +23,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'kien/ctrlp.vim'
 	" Plug 'me-vlad/spellfiles.vim'
 	" Plug 'tmhedberg/matchit'
-	" Plug 'alvan/vim-closetag'
+  Plug 'alvan/vim-closetag'
 	Plug 'cakebaker/scss-syntax.vim'
 	" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 	Plug 'ryanoasis/vim-devicons'
@@ -35,6 +35,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'digitaltoad/vim-pug'
   Plug 'leafgarland/typescript-vim'
   Plug 'jiangmiao/auto-pairs'
+  Plug 'mxw/vim-jsx'
 call plug#end()
 
 " TEMPORARY OPRIONS, LATER SHOULD BE TRANSMITED TO THE RIGHT PLACE
@@ -276,3 +277,5 @@ syn region Search start=/console/ end=/;/
 autocmd BufEnter *powershell.exe highlight Normal ctermbg=black
 autocmd BufLeave *powershell.exe highlight Normal ctermbg=white
 
+" vim-closetag
+let g:closetag_filenames = '*.html,*.js'
