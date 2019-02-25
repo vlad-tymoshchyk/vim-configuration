@@ -161,29 +161,23 @@ nnoremap <space> i<space><esc>l
 nnoremap <enter> i<enter><esc>l
 nnoremap <backspace> i<backspace><esc>l
 nnoremap vv ggVG
-nnoremap vc ggVG"+y
 
-nnoremap <leader>bt :call JsBeautify()<cr>
 nnoremap <leader>co oconsole.log();<esc><left>i
-<<<<<<< HEAD
-inoremap <leader><leader><leader> console.log();<left><left>
-=======
 inoremap <leader>co console.log();<esc><left>i
->>>>>>> da684918aeefffb78803156b878652c9212c410e
 
 " ABBREVIATIONS ==================================================
 iabbrev cnsl console.log( );<left><left><left>
 iabbrev <== <?= ?><left><left><left>
 
-inoremap {<cr> {<cr>}<esc>O
-inoremap {{ {<cr><cr>}<esc>o
-inoremap {<space> {  }<left><left>
-inoremap [<cr> [<cr>]<esc>O
-inoremap [[ [<cr><cr>]<esc>o
-inoremap [<space> [  ]<left><left>
-inoremap (<cr> (<cr>)<esc>O
-inoremap (( (<cr><cr>)<esc>o
-inoremap (<space> (  )<left><left>
+"inoremap {<cr> {<cr>}<esc>O
+"inoremap {{ {<cr><cr>}<esc>o
+"inoremap {<space> {  }<left><left>
+"inoremap [<cr> [<cr>]<esc>O
+"inoremap [[ [<cr><cr>]<esc>o
+"inoremap [<space> [  ]<left><left>
+"inoremap (<cr> (<cr>)<esc>O
+"inoremap (( (<cr><cr>)<esc>o
+"inoremap (<space> (  )<left><left>
 
 autocmd BufNewFile *.phtml :set filetype=html
 
@@ -283,10 +277,7 @@ syn region Search start=/console/ end=/;/
 autocmd BufEnter *powershell.exe highlight Normal ctermbg=black
 autocmd BufLeave *powershell.exe highlight Normal ctermbg=white
 
-<<<<<<< HEAD
 syn keyword DiffText console log consolelog console\.log
 
-=======
 " vim-closetag
 let g:closetag_filenames = '*.html,*.js'
->>>>>>> da684918aeefffb78803156b878652c9212c410e
