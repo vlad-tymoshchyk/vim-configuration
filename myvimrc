@@ -6,26 +6,27 @@ call plug#begin('~/.vim/plugged')
 	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 	Plug 'wellle/targets.vim'
 	" Plug 'jistr/vim-nerdtree-tabs'
-	" Plug 'majutsushi/tagbar'
+  Plug 'majutsushi/tagbar'
 	"Plug 'vim-airline/vim-airline'
 	Plug 'NLKNguyen/copy-cut-paste.vim'
 	Plug 'junegunn/fzf.vim'
 	Plug 'itchyny/lightline.vim'
 	" Plug 'terryma/vim-multiple-cursors'
 	" Plug 'danro/rename.vim'
-  Plug 'w0rp/ale'
+  "Plug 'w0rp/ale'
 	" Plug 'vim-gitgutter'
 	" Plug 'vim-scripts/Vim-Support'
-	Plug 'kien/ctrlp.vim'
+	"Plug 'kien/ctrlp.vim'
 	" Plug 'me-vlad/spellfiles.vim'
 	" Plug 'tmhedberg/matchit'
 	" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 	Plug 'ryanoasis/vim-devicons'
 	Plug 'maksimr/vim-jsbeautify'
 	Plug 'editorconfig/editorconfig-vim'
-	" Plug 'bkad/CamelCaseMotion'
   Plug 'morhetz/gruvbox'
+  Plug 'Valloric/MatchTagAlways'
   "Plug 'vim-syntastic/syntastic'
+  "
 " PLUGINS AS UTILS
   Plug 'jiangmiao/auto-pairs'
   Plug 'alvan/vim-closetag'
@@ -90,7 +91,7 @@ set novisualbell
 set mouse=a
 
 "	Code folding ================
-set foldmethod=marker
+set foldmethod=manual
 set nofoldenable
 set foldnestmax=2
 
@@ -162,8 +163,12 @@ nnoremap <enter> i<enter><esc>l
 nnoremap <backspace> i<backspace><esc>l
 nnoremap vv ggVG
 
-nnoremap <leader>co oconsole.log();<esc><left>i
-inoremap <leader>co console.log();<esc><left>i
+nnoremap <tab>cl oconsole.log();<esc><left>i
+inoremap <tab>cl console.log();<esc><left>i
+nnoremap <tab>db odebugger<esc>
+inoremap <tab>db debugger<esc>
+
+inoremap <leader>cr require(''),<esc><left><left>i
 
 " ABBREVIATIONS ==================================================
 iabbrev cnsl console.log( );<left><left><left>
@@ -232,6 +237,10 @@ if has('nvim')
 
 	let g:NERDTreeDirArrowExpandable = "▸"
 	let g:NERDTreeDirArrowCollapsible = "▾" 
+
+  let g:NERDSpaceDelims = 1
+  let g:NERDDefaultAlign = 'left'
+
 
 	au! TermOpen * call CustomizeAfterTermOpen()
   au! BufEnter *powershell.exe call CustomizeAfterTermEnter()
