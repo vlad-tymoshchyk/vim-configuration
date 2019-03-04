@@ -157,44 +157,33 @@ inoremap <leader>w <esc>:w<cr>
 inoremap <c-s> <esc>:w<cr>
 nnoremap <leader>q :q!<cr>
 nnoremap <leader>x :x<cr>
-nnoremap <a-q>u :qa!<cr>
 nnoremap <space> i<space><esc>l
 nnoremap <enter> i<enter><esc>l
 nnoremap <backspace> i<backspace><esc>l
 nnoremap vv ggVG
 
-nnoremap <tab>cl oconsole.log();<esc><left>i
-inoremap <tab>cl console.log();<esc><left>i
-nnoremap <tab>db odebugger<esc>
-inoremap <tab>db debugger<esc>
+nnoremap <leader>co oconsole.log();<esc><left>i
+inoremap <leader>co console.log();<esc><left>i
 
-inoremap <leader>cr require(''),<esc><left><left>i
+nnoremap <leader>c, :call ToggleEndChar(',')<cr>
+nnoremap <leader>c; :call ToggleEndChar(';')<cr>
 
 " ABBREVIATIONS ==================================================
-iabbrev cnsl console.log( );<left><left><left>
-iabbrev <== <?= ?><left><left><left>
-
-"inoremap {<cr> {<cr>}<esc>O
-"inoremap {{ {<cr><cr>}<esc>o
-"inoremap {<space> {  }<left><left>
-"inoremap [<cr> [<cr>]<esc>O
-"inoremap [[ [<cr><cr>]<esc>o
-"inoremap [<space> [  ]<left><left>
-"inoremap (<cr> (<cr>)<esc>O
-"inoremap (( (<cr><cr>)<esc>o
-"inoremap (<space> (  )<left><left>
 
 autocmd BufNewFile *.phtml :set filetype=html
 
 map <F5> :wall!<CR>:!sbcl --load foo.cl<CR><CR>
 
 " SETTINGS
-"nnoremap <silent> <c-s>w :set wrap!<cr>
-"nnoremap <silent> <c-s>l :set list!<cr>
-"nnoremap <silent> <c-s>c :source $myvimrc<cr>
-"nnoremap <silent> <c-s>r :e %<cr>
-"nnoremap <silent> <c-s>vc tabe ~\vim-configuration\myvimrc<cr>
 
+function! ToggleEndChar(char)
+  let l:lastchar = getline('.')[col('$') - 2]
+  if l:lastchar ==# a:char
+    exe "normal! mz$x`z"
+  else
+    exe "normal! mzA" . a:char . "`z"
+  endif
+endfunction
 
 cnoremap jk <esc>
 
@@ -267,6 +256,7 @@ command! Conf source ~/vim-configuration/myvimrc
 command! Beautify call JsBeautify()
 command! HtmlBeautify call HtmlBeautify()
 command! Font Guifont Consolas:h15
+command! Exit qa!
 
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeShowHidden = 1
