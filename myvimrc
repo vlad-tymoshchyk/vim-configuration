@@ -165,8 +165,8 @@ nnoremap vv ggVG
 nnoremap <leader>co oconsole.log();<esc><left>i
 inoremap <leader>co console.log();<esc><left>i
 
-nnoremap <leader>c, :call ToggleEndChar(',')<cr>
-nnoremap <leader>c; :call ToggleEndChar(';')<cr>
+nnoremap <silent> <leader>c, :call ToggleEndChar(',')<cr>
+nnoremap <silent> <leader>c; :call ToggleEndChar(';')<cr>
 
 " ABBREVIATIONS ==================================================
 
