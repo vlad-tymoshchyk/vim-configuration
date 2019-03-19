@@ -8,7 +8,7 @@ call plug#begin('~/.vim/plugged')
 	" Plug 'jistr/vim-nerdtree-tabs'
   Plug 'majutsushi/tagbar'
 	"Plug 'vim-airline/vim-airline'
-	Plug 'NLKNguyen/copy-cut-paste.vim'
+	" Plug 'NLKNguyen/copy-cut-paste.vim'
 	Plug 'junegunn/fzf.vim'
 	Plug 'itchyny/lightline.vim'
 	" Plug 'terryma/vim-multiple-cursors'
@@ -25,7 +25,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'editorconfig/editorconfig-vim'
   Plug 'morhetz/gruvbox'
   Plug 'Valloric/MatchTagAlways'
-  "Plug 'vim-syntastic/syntastic'
+  Plug 'vim-syntastic/syntastic'
   "
 " PLUGINS AS UTILS
   Plug 'jiangmiao/auto-pairs'
@@ -41,6 +41,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'mxw/vim-jsx'
 	Plug 'pangloss/vim-javascript'
 	Plug 'cakebaker/scss-syntax.vim'
+  Plug 'Yggdroot/indentLine'
+  Plug 'joshdick/onedark.vim'
 call plug#end()
 
 " TEMPORARY OPRIONS, LATER SHOULD BE TRANSMITED TO THE RIGHT PLACE
@@ -125,6 +127,8 @@ inoremap ;; <esc>:
 noremap <leader>q :q<cr>
 noremap <leader>x :x<cr>
 " FUNCTIONAL KEYS
+noremap <silent> <F5> source ~/vim-configuration/myvimrc<cr>
+noremap <silent> <F6> :IndentLinesToggle<cr>
 noremap <silent> <F7> :NERDTreeToggle<cr>
 noremap <silent> <F8> :TagbarToggle<cr>
 " navigation tabs/buffers
@@ -162,7 +166,7 @@ nnoremap <enter> i<enter><esc>l
 nnoremap <backspace> i<backspace><esc>l
 nnoremap vv ggVG
 
-nnoremap <leader>co oconsole.log();<esc><left>i
+nnoremap <leader>co oconsole.log(<esc>mza); /* debugging-console */<esc>`za
 inoremap <leader>co console.log();<esc><left>i
 
 nnoremap <silent> <leader>c, :call ToggleEndChar(',')<cr>
@@ -183,6 +187,46 @@ function! ToggleEndChar(char)
   else
     exe "normal! mzA" . a:char . "`z"
   endif
+endfunction
+
+nnoremap <silent> <tab>it :call InsertSnippet('it')<cr>
+nnoremap <silent> <tab>de :call InsertSnippet('describe')<cr>
+nnoremap <silent> <tab>re :call InsertSnippet('require')<cr>
+" nnoremap <silent> <leader>co :call InsertSnippet('console.log')<cr>
+nnoremap <silent> <leader>n :call NextMarkInSnippet()<cr>
+inoremap <leader>n <esc>:call NextMarkInSnippet()<cr>
+
+function! InsertSnippet(type)
+  let g:nextMarkInSnippet = 'z'
+  let l:isempty = getline('.') =~ "^$"
+  let l:command = l:isempty ? 'cc' : 'o'
+  if a:type ==# 'it'
+    exe "normal! " . l:command . "it(''mza, () => {mya});`z"
+    startinsert
+  endif
+  if a:type ==# 'describe'
+    exe "normal! " . l:command . "describe(''mza, () => {mya});`z"
+    startinsert
+  endif
+  if a:type ==# 'require'
+    exe "normal! " . l:command . " =mza require(''mya);`zh"
+    startinsert
+  endif
+  if a:type ==# 'console.log'
+    exe "normal! " . l:command . "console.log();"
+    startinsert
+  endif
+endfunction
+
+function! NextMarkInSnippet()
+  exe "normal! `y"
+  startinsert
+  " if g:nextMarkInSnippet
+  "   exe "normal! `" . g:nextMarkInSnippet
+  "   startinsert
+  "   echo 'end'
+  "   g:nextMarkInSnippet = nr2char(char2nr(g:nextMarkInSnippet) - 1)
+  " endif
 endfunction
 
 cnoremap jk <esc>
@@ -248,6 +292,12 @@ if has('nvim')
   function! CustomizeAfterTermLeave()
   endfunction
 
+  command! Vterm call OpenSideTerminal()
+  function! OpenSideTerminal()
+    exe ":vs"
+    exe "<c-w>w"
+    echo "doen"
+  endfunction
 endif
 
 " source ~\vimscripts\
