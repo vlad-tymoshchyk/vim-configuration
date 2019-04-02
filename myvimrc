@@ -1,49 +1,65 @@
 " CONFIGURATION SETTINGS FOR NEOVIM
 
+" source "./plug.vim"
+
 call plug#begin('~/.vim/plugged')
 
-" 
-	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-	Plug 'wellle/targets.vim'
-	" Plug 'jistr/vim-nerdtree-tabs'
+  Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+  Plug 'wellle/targets.vim'
+  " Plug 'jistr/vim-nerdtree-tabs'
   Plug 'majutsushi/tagbar'
-	"Plug 'vim-airline/vim-airline'
-	" Plug 'NLKNguyen/copy-cut-paste.vim'
-	Plug 'junegunn/fzf.vim'
-	Plug 'itchyny/lightline.vim'
-	" Plug 'terryma/vim-multiple-cursors'
-	" Plug 'danro/rename.vim'
-  "Plug 'w0rp/ale'
-	" Plug 'vim-gitgutter'
-	" Plug 'vim-scripts/Vim-Support'
-	"Plug 'kien/ctrlp.vim'
-	" Plug 'me-vlad/spellfiles.vim'
-	" Plug 'tmhedberg/matchit'
-	" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
-	Plug 'ryanoasis/vim-devicons'
-	Plug 'maksimr/vim-jsbeautify'
-	Plug 'editorconfig/editorconfig-vim'
+  "Plug 'vim-airline/vim-airline'
+  " Plug 'NLKNguyen/copy-cut-paste.vim'
+  Plug 'junegunn/fzf.vim'
+  Plug 'itchyny/lightline.vim'
+  " Plug 'terryma/vim-multiple-cursors'
+  " Plug 'danro/rename.vim'
+  " Plug 'w0rp/ale'
+  " Plug 'vim-gitgutter'
+  " Plug 'vim-scripts/Vim-Support'
+  " Plug 'kien/ctrlp.vim'
+  " Plug 'me-vlad/spellfiles.vim'
+  " Plug 'tmhedberg/matchit'
+  " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+  Plug 'ryanoasis/vim-devicons'
+  Plug 'maksimr/vim-jsbeautify'
+  Plug 'editorconfig/editorconfig-vim'
   Plug 'morhetz/gruvbox'
   Plug 'Valloric/MatchTagAlways'
   Plug 'vim-syntastic/syntastic'
   "
-" PLUGINS AS UTILS
+  " PLUGINS AS UTILS
   Plug 'jiangmiao/auto-pairs'
   Plug 'alvan/vim-closetag'
-	Plug 'tpope/vim-surround'
-	Plug 'scrooloose/nerdcommenter'
-	Plug 'mattn/emmet-vim'
+  Plug 'tpope/vim-surround'
+  Plug 'scrooloose/nerdcommenter'
+  Plug 'mattn/emmet-vim'
 
-" PLUGINS FOR SYNTAX
+  " PLUGINS FOR SYNTAX
   Plug 'leafgarland/typescript-vim'
   Plug 'digitaltoad/vim-pug'
   Plug 'othree/html5.vim'
   Plug 'mxw/vim-jsx'
-	Plug 'pangloss/vim-javascript'
-	Plug 'cakebaker/scss-syntax.vim'
+  Plug 'pangloss/vim-javascript'
+  Plug 'cakebaker/scss-syntax.vim'
   Plug 'Yggdroot/indentLine'
+  let g:indentLine_enabled = 0
   Plug 'joshdick/onedark.vim'
+  Plug 'ternjs/tern_for_vim'
+  if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  else
+    " Plug 'Shougo/deoplete.nvim'
+    " Plug 'roxma/nvim-yarp'
+    " Plug 'roxma/vim-hug-neovim-rpc'
+  endif
+  " let g:deoplete#enable_at_startup = 1
+  Plug 'Shougo/neosnippet.vim'
+  Plug 'Shougo/neosnippet-snippets'
+  Plug 'dracula/vim'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 call plug#end()
+
 
 " TEMPORARY OPRIONS, LATER SHOULD BE TRANSMITED TO THE RIGHT PLACE
 set exrc
@@ -111,7 +127,7 @@ set noswapfile
 set nospell
 
 set encoding=UTF-8
-set guifont=Consolas:h15
+" set guifont=Consolas:h15
 set cursorline
 set colorcolumn=0
 
@@ -127,7 +143,7 @@ inoremap ;; <esc>:
 noremap <leader>q :q<cr>
 noremap <leader>x :x<cr>
 " FUNCTIONAL KEYS
-noremap <silent> <F5> source ~/vim-configuration/myvimrc<cr>
+" noremap <silent> <F5> :source ~/vim-configuration/myvimrc<cr>
 noremap <silent> <F6> :IndentLinesToggle<cr>
 noremap <silent> <F7> :NERDTreeToggle<cr>
 noremap <silent> <F8> :TagbarToggle<cr>
@@ -167,7 +183,7 @@ nnoremap <backspace> i<backspace><esc>l
 nnoremap vv ggVG
 
 nnoremap <leader>co oconsole.log(<esc>mza); /* debugging-console */<esc>`za
-inoremap <leader>co console.log();<esc><left>i
+inoremap <leader>co console.log(<esc>mza); /* debugging-console */<esc>`za
 
 nnoremap <silent> <leader>c, :call ToggleEndChar(',')<cr>
 nnoremap <silent> <leader>c; :call ToggleEndChar(';')<cr>
@@ -302,6 +318,7 @@ endif
 
 " source ~\vimscripts\
 command! Vimrc tabe ~/vim-configuration/myvimrc
+command! Package tabe ~/package.json
 command! Conf source ~/vim-configuration/myvimrc
 command! Beautify call JsBeautify()
 command! HtmlBeautify call HtmlBeautify()
@@ -330,3 +347,52 @@ syn keyword DiffText console log consolelog console\.log
 
 " vim-closetag
 let g:closetag_filenames = '*.html,*.js'
+set colorcolumn=0
+
+" shortcuts for buffers
+nnoremap <leader>1 :b 1<cr>
+nnoremap <leader>2 :b 2<cr>
+nnoremap <leader>3 :b 3<cr>
+nnoremap <leader>4 :b 4<cr>
+nnoremap <leader>5 :b 5<cr>
+nnoremap <leader>6 :b 6<cr>
+nnoremap <leader>7 :b 7<cr>
+nnoremap <leader>8 :b 8<cr>
+nnoremap <leader>9 :b 9<cr>
+nnoremap <leader>l :ls<cr>
+nnoremap <leader>. :b
+
+nnoremap <leader>cd odebugger<esc>
+inoremap <leader>cd debugger<esc>
+
+nnoremap <leader>cw :call Windowfy()<cr>
+nnoremap <leader>cl :call LogTheVariable()<cr>
+function! LogTheVariable()
+  exe "normal! yiw"
+  exe "normal! oconsole.log(\""
+  exe "normal! pa:\", "
+  exe "normal! pa); /* debugging-console */"
+endfunction
+function! Windowfy()
+  exe "normal! yiwo"
+  exe "normal! iwindow."
+  exe "normal! pa = "
+  exe "normal! pa; /* debugging-console */"
+endfunction
+command! ClearDebug :g/* debugging-console */d 
+" some text in (some text in brackers) and also after that
+
+if !has('nvim')
+  set pythonthreedll="C:\Users\vtymoshchyk\AppData\Local\Programs\Python\Python37\python37.dll"
+  set pythondll="C:\Users\vtymoshchyk\AppData\Local\Programs\Python\Python27\python27.dll"
+end
+
+nnoremap \\a vi(
+
+let g:mkdp_preview_options = {
+      \   'maid': {
+      \     'theme': 'default'
+      \   }
+      \ }
+
+nnoremap \> f>i
