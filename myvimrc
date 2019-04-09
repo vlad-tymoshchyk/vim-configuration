@@ -1,6 +1,7 @@
 " CONFIGURATION SETTINGS FOR NEOVIM
 
 " source "./plug.vim"
+let &rtp.=",~/vim-configuration"
 
 call plug#begin('~/.vim/plugged')
 
@@ -10,6 +11,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'majutsushi/tagbar'
   "Plug 'vim-airline/vim-airline'
   " Plug 'NLKNguyen/copy-cut-paste.vim'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   Plug 'itchyny/lightline.vim'
   " Plug 'terryma/vim-multiple-cursors'
@@ -17,7 +19,7 @@ call plug#begin('~/.vim/plugged')
   " Plug 'w0rp/ale'
   " Plug 'vim-gitgutter'
   " Plug 'vim-scripts/Vim-Support'
-  " Plug 'kien/ctrlp.vim'
+  Plug 'kien/ctrlp.vim'
   " Plug 'me-vlad/spellfiles.vim'
   " Plug 'tmhedberg/matchit'
   " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
@@ -58,6 +60,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'Shougo/neosnippet-snippets'
   Plug 'dracula/vim'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+
+  " snippets
+  Plug 'MarcWeber/vim-addon-mw-utils'
+  Plug 'tomtom/tlib_vim'
+  Plug 'garbas/vim-snipmate'
+  Plug 'honza/vim-snippets'
 call plug#end()
 
 
@@ -143,7 +151,7 @@ inoremap ;; <esc>:
 noremap <leader>q :q<cr>
 noremap <leader>x :x<cr>
 " FUNCTIONAL KEYS
-" noremap <silent> <F5> :source ~/vim-configuration/myvimrc<cr>
+noremap <silent> <F5> :w<cr>:Conf<cr>
 noremap <silent> <F6> :IndentLinesToggle<cr>
 noremap <silent> <F7> :NERDTreeToggle<cr>
 noremap <silent> <F8> :TagbarToggle<cr>
@@ -156,10 +164,12 @@ nnoremap <silent> <c-k> <c-w>w
 nnoremap <silent> <a-h> gT
 nnoremap <silent> <a-l> gt
 
-nnoremap <leader>r :e %<cr>
+nnoremap <silent> <leader>r :e %<cr>
 
-nmap <c-,> <c-y>,
-imap <c-,> <c-y>,jk
+" most likely to delete it, instead start to use full hot key of three keys
+" nmap <c-,> <c-y>,
+" imap <c-,> <c-y>,jk
+let g:user_emmet_mode='in'
 
 nnoremap : ;
 nnoremap ; :
@@ -192,7 +202,7 @@ nnoremap <silent> <leader>c; :call ToggleEndChar(';')<cr>
 
 autocmd BufNewFile *.phtml :set filetype=html
 
-map <F5> :wall!<CR>:!sbcl --load foo.cl<CR><CR>
+" map <F5> :wall!<CR>:!sbcl --load foo.cl<CR><CR>
 
 " SETTINGS
 
@@ -205,9 +215,9 @@ function! ToggleEndChar(char)
   endif
 endfunction
 
-nnoremap <silent> <tab>it :call InsertSnippet('it')<cr>
-nnoremap <silent> <tab>de :call InsertSnippet('describe')<cr>
-nnoremap <silent> <tab>re :call InsertSnippet('require')<cr>
+" nnoremap <silent> <tab>it :call InsertSnippet('it')<cr>
+" nnoremap <silent> <tab>de :call InsertSnippet('describe')<cr>
+" nnoremap <silent> <tab>re :call InsertSnippet('require')<cr>
 " nnoremap <silent> <leader>co :call InsertSnippet('console.log')<cr>
 nnoremap <silent> <leader>n :call NextMarkInSnippet()<cr>
 inoremap <leader>n <esc>:call NextMarkInSnippet()<cr>
@@ -246,6 +256,9 @@ function! NextMarkInSnippet()
 endfunction
 
 cnoremap jk <esc>
+
+let g:NERDSpaceDelims = 1
+let g:NERDDefaultAlign = 'left'
 
 if has('nvim')
 	colorscheme dracula
@@ -287,8 +300,6 @@ if has('nvim')
 	let g:NERDTreeDirArrowExpandable = "▸"
 	let g:NERDTreeDirArrowCollapsible = "▾" 
 
-  let g:NERDSpaceDelims = 1
-  let g:NERDDefaultAlign = 'left'
 
 
 	au! TermOpen * call CustomizeAfterTermOpen()
@@ -359,7 +370,7 @@ nnoremap <leader>6 :b 6<cr>
 nnoremap <leader>7 :b 7<cr>
 nnoremap <leader>8 :b 8<cr>
 nnoremap <leader>9 :b 9<cr>
-nnoremap <leader>l :ls<cr>
+nnoremap <silent> <leader>l :Buffers<cr>
 nnoremap <leader>. :b
 
 nnoremap <leader>cd odebugger<esc>
@@ -395,4 +406,99 @@ let g:mkdp_preview_options = {
       \   }
       \ }
 
-nnoremap \> f>i
+" nnoremap <silent> <tab>rcc :call <SID>getSnippet('rcc')<cr>
+" inoremap <silent> <tab>rcc :call <SID>getSnippet('rcc')<cr>
+
+nnoremap ,cr Simport React, { Component } from 'react';<cr>
+      \<cr>
+      \class nameofclass extends Component {<cr>
+      \render() {<cr>
+      \return (<cr>
+      \<h1>This component is for: nameofclass</h1><cr>
+      \)<cr>
+      \}<cr>
+      \}
+      \<cr>
+      \<cr>
+      \export default nameofclass;<esc>ggVG:s/nameofclass/
+
+command! SortWords call setline('.', join(sort(split(getline('.'), ' ')), " "))
+
+hi CursorLine ctermfg=White ctermbg=Red
+
+autocmd FileType markdown nnoremap <silent> <C-x> :call MarkAsCrossed()<cr>
+autocmd FileType markdown nnoremap <silent> <C-d> :call MarkAsDone()<cr>
+autocmd FileType markdown nnoremap <silent> <F8> :MarkdownPreview<cr>
+function! MarkAsCrossed()
+  normal! ma^f]ll
+  let c = getline('.')[col('.')-1]
+  if c == "~" 
+    normal! 2x$xx
+  else
+    normal! i~~
+    normal! A~~
+  endif
+  normal! `a
+endfunction
+function! MarkAsDone()
+  normal! ma^f[l
+  let c = getline('.')[col('.')-1]
+  if c == "x"
+    normal! r 
+  endif
+  if c == " "
+    normal! rx
+  endif
+  normal! `a
+endfunction
+
+nnoremap <silent> : :Files<cr>
+
+" nnoremap <c-m> :messages<cr>
+
+" inoremap <silent> <tab> <esc>:call ExpandSnippet()<cr>
+
+function! ExpandSnippet()
+  let cur = col('.')
+  let cmd = getline('.')[cur - 3 : cur - 1]
+  if cmd == 'rcc'
+    call s:getSnippet(cmd)
+  elseif cmd == 'req'
+    call s:getSnippet(cmd)
+  else
+    exe "normal! a\<tab>"
+  endif
+  " call feedkeys('a', 'n')
+endfunction
+
+function! s:getSnippet(type)
+  normal! hh3s
+  if a:type == "rcc"
+    exe "norm! Simport React, { Component } from 'react';\<cr>
+          \\<cr>
+          \class nameofclass extends Component {\<cr>
+          \render() {\<cr>
+          \return (\<cr>
+          \<h1>This component is for: nameofclass</h1>\<cr>
+          \)\<cr>
+          \}\<cr>
+          \}
+          \\<cr>
+          \\<cr>
+          \export default nameofclass;"
+    norm! /nameofclass
+    " norm! 8k^wviw
+  elseif a:type == "req"
+    exe "norm! aconst pack = require('pack');"
+    norm! ^wviw
+  endif
+
+
+endfunction
+
+let g:snipMate = {}
+let g:snipMate.override = 1
+
+let $FZF_DEFAULT_COMMAND = "fd --type f"
+
+set colorcolumn=0
