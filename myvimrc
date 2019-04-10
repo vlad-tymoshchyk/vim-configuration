@@ -7,7 +7,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'wellle/targets.vim'
 	" Plug 'jistr/vim-nerdtree-tabs'
   Plug 'majutsushi/tagbar'
-	"Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
 	Plug 'NLKNguyen/copy-cut-paste.vim'
 	Plug 'junegunn/fzf.vim'
 	Plug 'itchyny/lightline.vim'
@@ -25,7 +26,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'editorconfig/editorconfig-vim'
   Plug 'morhetz/gruvbox'
   Plug 'Valloric/MatchTagAlways'
-  "Plug 'vim-syntastic/syntastic'
+  Plug 'vim-syntastic/syntastic'
   "
 " PLUGINS AS UTILS
   Plug 'jiangmiao/auto-pairs'
@@ -41,6 +42,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'mxw/vim-jsx'
 	Plug 'pangloss/vim-javascript'
 	Plug 'cakebaker/scss-syntax.vim'
+
+  Plug 'honza/vim-snippets'
 call plug#end()
 
 " TEMPORARY OPRIONS, LATER SHOULD BE TRANSMITED TO THE RIGHT PLACE
@@ -163,10 +166,11 @@ nnoremap <enter> i<enter><esc>l
 nnoremap <backspace> i<backspace><esc>l
 nnoremap vv ggVG
 
-nnoremap <tab>cl oconsole.log();<esc><left>i
-inoremap <tab>cl console.log();<esc><left>i
+nnoremap <leader>co oconsole.log();<esc><left>i
+inoremap <leader>co console.log();<left><left>
 nnoremap <tab>db odebugger<esc>
-inoremap <tab>db debugger<esc>
+nnoremap <leader>c; mzA;<esc>`z
+nnoremap <leader>c, mzA,<esc>`z
 
 inoremap <leader>cr require(''),<esc><left><left>i
 
@@ -290,3 +294,75 @@ syn keyword DiffText console log consolelog console\.log
 
 " vim-closetag
 let g:closetag_filenames = '*.html,*.js'
+
+
+let g:user_emmet_settings = {
+      \    'variables' : {
+      \        'lang' : 'ja',
+      \    },
+      \    'html' : {
+      \        'filters' : 'html',
+      \        'indentation' : ' ',
+      \        'expandos' : {
+      \            'ol': 'ol>li',
+      \            'list': 'ul>li*3',
+      \        },
+      \        'default_attributes': {
+      \            'a': {'href': ''},
+      \            'link': [{'rel': 'stylesheet'}, {'href': ''}],
+      \        },
+      \        'aliases': {
+      \            'bq': 'blockquote',
+      \            'obj': 'object',
+      \            'src': 'source',
+      \        },
+      \        'empty_elements': 'area,base,basefont,...,isindex,link,meta,...',
+      \        'block_elements': 'address,applet,blockquote,...,li,link,map,...',
+      \        'inline_elements': 'a,abbr,acronym,...',
+      \        'empty_element_suffix': ' />',
+      \    },
+      \    'perl' : {
+      \        'indentation' : '  ',
+      \        'aliases' : {
+      \            'req' : "require '|'"
+      \        },
+      \        'snippets' : {
+      \            'use' : "use strict\nuse warnings\n\n",
+      \            'w' : "warn \"${cursor}\";",
+      \        },
+      \    },
+      \    'php' : {
+      \        'extends' : 'html',
+      \        'filters' : 'html,c',
+      \    },
+      \    'css' : {
+      \        'filters' : 'fc',
+      \    },
+      \    'javascript' : {
+      \        'snippets' : {
+      \            'jq' : "\\$(function() {\n\t${cursor}${child}\n});",
+      \            'jq:each' : "\\$.each(arr, function(index, item)\n\t${child}\n});",
+      \            'fn' : "(function() {\n\t${cursor}\n})();",
+      \            'tm' : "setTimeout(function() {\n\t${cursor}\n}, 100);",
+      \        },
+      \    },
+      \    'java' : {
+      \        'indentation' : '    ',
+      \        'snippets' : {
+      \            'main': "public static void main(String[] args) {\n\t|\n}",
+      \            'println': "System.out.println(\"|\");",
+      \            'class': "public class | {\n}\n",
+      \        },
+      \    },
+      \}
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+
