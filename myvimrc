@@ -1,7 +1,11 @@
 " CONFIGURATION SETTINGS FOR NEOVIM
 
 " source "./plug.vim"
-let &rtp.=",~/vim-configuration"
+" let &rtp.=",~/vim-configuration"
+" se pythonthreedll=C:\Program\ Files\Python-3.7\python37.dll
+if has('nvim')
+  let g:python3_host_prog = 'C:\Program\ Files\ (x86)\Python-3.7\python'
+endif
 
 call plug#begin('~/.vim/plugged')
 
@@ -16,19 +20,19 @@ call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
   " Plug 'terryma/vim-multiple-cursors'
   " Plug 'danro/rename.vim'
-  " Plug 'w0rp/ale'
-  " Plug 'vim-gitgutter'
+  Plug 'w0rp/ale'
+  Plug 'airblade/vim-gitgutter'
   " Plug 'vim-scripts/Vim-Support'
   Plug 'kien/ctrlp.vim'
   " Plug 'me-vlad/spellfiles.vim'
   " Plug 'tmhedberg/matchit'
-  " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+  Plug 'Valloric/YouCompleteMe', { 'do': 'python install.py --tern-completer' }
   Plug 'ryanoasis/vim-devicons'
   Plug 'maksimr/vim-jsbeautify'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'morhetz/gruvbox'
   Plug 'Valloric/MatchTagAlways'
-  Plug 'vim-syntastic/syntastic'
+  " Plug 'vim-syntastic/syntastic'
   "
   " PLUGINS AS UTILS
   Plug 'jiangmiao/auto-pairs'
@@ -48,24 +52,31 @@ call plug#begin('~/.vim/plugged')
   let g:indentLine_enabled = 0
   Plug 'joshdick/onedark.vim'
   Plug 'ternjs/tern_for_vim'
-  if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  else
+  " if has('nvim')
+  "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " else
     " Plug 'Shougo/deoplete.nvim'
     " Plug 'roxma/nvim-yarp'
     " Plug 'roxma/vim-hug-neovim-rpc'
-  endif
+  " endif
   " let g:deoplete#enable_at_startup = 1
-  Plug 'Shougo/neosnippet.vim'
-  Plug 'Shougo/neosnippet-snippets'
+  " Plug 'Shougo/neosnippet.vim'
+  " Plug 'Shougo/neosnippet-snippets'
   Plug 'dracula/vim'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
   " snippets
   Plug 'MarcWeber/vim-addon-mw-utils'
   Plug 'tomtom/tlib_vim'
-  Plug 'garbas/vim-snipmate'
+  " Plug 'garbas/vim-snipmate'
+  Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
+  Plug 'easymotion/vim-easymotion'
+  Plug 'michaeljsmith/vim-indent-object'
+
+  " Plug 'vlad-tymoshchyk/vlad-tymoshchyk-vim-plugin'
+  Plug '~/vim-configuration/vlad-tymoshchyk/vlad-tymoshchyk-vim-plugin'
+
 call plug#end()
 
 
@@ -97,9 +108,9 @@ set lazyredraw
 
 "	Text rendering ==============
 set display+=lastline
-set encoding=UTF-8
+set encoding=utf-8
 set linebreak
-set scrolloff=7
+set scrolloff=0
 set sidescrolloff=5
 set wrap
 set textwidth=0
@@ -135,7 +146,9 @@ set noswapfile
 set nospell
 
 set encoding=UTF-8
-" set guifont=Consolas:h15
+if !has('nvim')
+  set guifont=Consolas:h15
+endif
 set cursorline
 set colorcolumn=0
 
@@ -148,8 +161,8 @@ let mapleader = ","
 
 inoremap jk <esc>
 inoremap ;; <esc>:
-noremap <leader>q :q<cr>
-noremap <leader>x :x<cr>
+" noremap <leader>q :q<cr>
+" noremap <leader>x :x<cr>
 " FUNCTIONAL KEYS
 noremap <silent> <F5> :w<cr>:Conf<cr>
 noremap <silent> <F6> :IndentLinesToggle<cr>
@@ -159,8 +172,8 @@ noremap <silent> <F8> :TagbarToggle<cr>
 nnoremap <leader>s <c-w>W
 nnoremap <leader>d <c-w>w
 
-nnoremap <silent> <c-j> <c-w>W
-nnoremap <silent> <c-k> <c-w>w
+" nnoremap <silent> <c-j> <c-w>W
+" nnoremap <silent> <c-k> <c-w>w
 nnoremap <silent> <a-h> gT
 nnoremap <silent> <a-l> gt
 
@@ -170,6 +183,7 @@ nnoremap <silent> <leader>r :e %<cr>
 " nmap <c-,> <c-y>,
 " imap <c-,> <c-y>,jk
 let g:user_emmet_mode='in'
+" let g:user_emmet_leader_key='<c-,>'
 
 nnoremap : ;
 nnoremap ; :
@@ -181,12 +195,12 @@ vnoremap ; :
 " inoremap j gj
 " inoremap k gk
 
-nnoremap <leader>w :w<cr>
-nnoremap <c-s> :w<cr>
-inoremap <leader>w <esc>:w<cr>
-inoremap <c-s> <esc>:w<cr>
-nnoremap <leader>q :q!<cr>
-nnoremap <leader>x :x<cr>
+nnoremap <leader>w :echo "Saving is not 'w'"<cr>
+" nnoremap <c-s> :w<cr>
+" inoremap <leader>w <esc>:w<cr>
+" inoremap <c-s> <esc>:w<cr>
+" nnoremap <leader>q :q!<cr>
+" nnoremap <leader>x :x<cr>
 nnoremap <space> i<space><esc>l
 nnoremap <enter> i<enter><esc>l
 nnoremap <backspace> i<backspace><esc>l
@@ -219,41 +233,41 @@ endfunction
 " nnoremap <silent> <tab>de :call InsertSnippet('describe')<cr>
 " nnoremap <silent> <tab>re :call InsertSnippet('require')<cr>
 " nnoremap <silent> <leader>co :call InsertSnippet('console.log')<cr>
-nnoremap <silent> <leader>n :call NextMarkInSnippet()<cr>
-inoremap <leader>n <esc>:call NextMarkInSnippet()<cr>
+" nnoremap <silent> <leader>n :call NextMarkInSnippet()<cr>
+" inoremap <leader>n <esc>:call NextMarkInSnippet()<cr>
 
-function! InsertSnippet(type)
-  let g:nextMarkInSnippet = 'z'
-  let l:isempty = getline('.') =~ "^$"
-  let l:command = l:isempty ? 'cc' : 'o'
-  if a:type ==# 'it'
-    exe "normal! " . l:command . "it(''mza, () => {mya});`z"
-    startinsert
-  endif
-  if a:type ==# 'describe'
-    exe "normal! " . l:command . "describe(''mza, () => {mya});`z"
-    startinsert
-  endif
-  if a:type ==# 'require'
-    exe "normal! " . l:command . " =mza require(''mya);`zh"
-    startinsert
-  endif
-  if a:type ==# 'console.log'
-    exe "normal! " . l:command . "console.log();"
-    startinsert
-  endif
-endfunction
+" function! InsertSnippet(type)
+"   let g:nextMarkInSnippet = 'z'
+"   let l:isempty = getline('.') =~ "^$"
+"   let l:command = l:isempty ? 'cc' : 'o'
+"   if a:type ==# 'it'
+"     exe "normal! " . l:command . "it(''mza, () => {mya});`z"
+"     startinsert
+"   endif
+"   if a:type ==# 'describe'
+"     exe "normal! " . l:command . "describe(''mza, () => {mya});`z"
+"     startinsert
+"   endif
+"   if a:type ==# 'require'
+"     exe "normal! " . l:command . " =mza require(''mya);`zh"
+"     startinsert
+"   endif
+"   if a:type ==# 'console.log'
+"     exe "normal! " . l:command . "console.log();"
+"     startinsert
+"   endif
+" endfunction
 
-function! NextMarkInSnippet()
-  exe "normal! `y"
-  startinsert
-  " if g:nextMarkInSnippet
-  "   exe "normal! `" . g:nextMarkInSnippet
-  "   startinsert
-  "   echo 'end'
-  "   g:nextMarkInSnippet = nr2char(char2nr(g:nextMarkInSnippet) - 1)
-  " endif
-endfunction
+" function! NextMarkInSnippet()
+"   exe "normal! `y"
+"   startinsert
+"   " if g:nextMarkInSnippet
+"   "   exe "normal! `" . g:nextMarkInSnippet
+"   "   startinsert
+"   "   echo 'end'
+"   "   g:nextMarkInSnippet = nr2char(char2nr(g:nextMarkInSnippet) - 1)
+"   " endif
+" endfunction
 
 cnoremap jk <esc>
 
@@ -279,23 +293,6 @@ if has('nvim')
 	tnoremap <esc> <c-\><c-n>
 	tnoremap jk <c-\><c-n>
 	tnoremap <leader>q <c-\><c-n>:q<cr>
-
-	let g:terminal_color_0  = '#2e3436'
-	let g:terminal_color_1  = '#cc0000'
-	let g:terminal_color_2  = '#4e9a06'
-	let g:terminal_color_3  = '#c4a000'
-	let g:terminal_color_4  = '#3465a4'
-	let g:terminal_color_5  = '#75507b'
-	let g:terminal_color_6  = '#0b939b'
-	let g:terminal_color_7  = '#d3d7cf'
-	let g:terminal_color_8  = '#555753'
-	let g:terminal_color_9  = '#ef2929'
-	let g:terminal_color_10 = '#8ae234'
-	let g:terminal_color_11 = '#fce94f'
-	let g:terminal_color_12 = '#729fcf'
-	let g:terminal_color_13 = '#ad7fa8'
-	let g:terminal_color_14 = '#00f5e9'
-	let g:terminal_color_15 = '#eeeeec'
 
 	let g:NERDTreeDirArrowExpandable = "▸"
 	let g:NERDTreeDirArrowCollapsible = "▾" 
@@ -393,11 +390,6 @@ endfunction
 command! ClearDebug :g/* debugging-console */d 
 " some text in (some text in brackers) and also after that
 
-if !has('nvim')
-  set pythonthreedll="C:\Users\vtymoshchyk\AppData\Local\Programs\Python\Python37\python37.dll"
-  set pythondll="C:\Users\vtymoshchyk\AppData\Local\Programs\Python\Python27\python27.dll"
-end
-
 nnoremap \\a vi(
 
 let g:mkdp_preview_options = {
@@ -424,7 +416,7 @@ nnoremap ,cr Simport React, { Component } from 'react';<cr>
 
 command! SortWords call setline('.', join(sort(split(getline('.'), ' ')), " "))
 
-hi CursorLine ctermfg=White ctermbg=Red
+hi CursorLine ctermfg=White ctermbg=8
 
 autocmd FileType markdown nnoremap <silent> <C-x> :call MarkAsCrossed()<cr>
 autocmd FileType markdown nnoremap <silent> <C-d> :call MarkAsDone()<cr>
@@ -502,3 +494,42 @@ let g:snipMate.override = 1
 let $FZF_DEFAULT_COMMAND = "fd --type f"
 
 set colorcolumn=0
+
+" source ~\vim-configuration\test-plugin.vim
+
+
+" easy-motion configs
+" let g:EasyMotion_do_mapping = 0
+nmap t <Plug>(easymotion-bd-w)
+nmap f <Plug>(easymotion-s)
+nmap M <Plug>(easymotion-bd-jk)
+
+let g:ale_linters = {
+      \  'javascript': ['eslint']
+      \}
+
+nnoremap <silent> [W <Plug>(ale_first)
+nnoremap <silent> [w <Plug>(ale_previous)
+nnoremap <silent> ]w <Plug>(ale_next)
+nnoremap <silent> ]W <Plug>(ale_last)
+
+nnoremap <silent> <esc> :noh<cr>
+
+nnoremap <Up> k<c-y>
+nnoremap <Down> j<c-e>
+
+if has('python3')
+  echom 'Python3 supported'
+else
+  echoe 'Python3 is not availible'
+endif
+
+language en
+se shortmess+=Ia
+
+let g:ycm_key_list_stop_completion = "<esc>"
+let g:ycm_key_list_select_completion = ["<Tab>"]
+
+let g:UltiSnipsExpandTrigger = "<leader><Tab>"
+let g:UltiSnipsJumpForwardTrigger = "<Tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
