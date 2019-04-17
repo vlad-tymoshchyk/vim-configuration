@@ -1,184 +1,49 @@
-" CONFIGURATION SETTINGS FOR NEOVIM
-
-" adding plugins
-call plug#begin('~/.vim/plugged')
-	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-	Plug 'scrooloose/nerdcommenter'
-	Plug 'tpope/vim-surround'
-
-	Plug 'jceb/vim-orgmode'
-	" Plug 'jistr/vim-nerdtree-tabs'
-	Plug 'majutsushi/tagbar'
-	Plug 'vim-airline/vim-airline'
- 	" Plug 'NLKNguyen/copy-cut-paste.vim'
-	Plug 'junegunn/fzf.vim'
-	Plug 'itchyny/lightline.vim'
-	" Plug 'terryma/vim-multiple-cursors'
-	" Plug 'danro/rename.vim'
-	" Plug 'editorconfig/editorconfig-vim'
-	Plug 'mattn/emmet-vim'
-	Plug 'w0rp/ale'
-	" Plug 'vim-gitgutter'
-	" Plug 'vim-scripts/Vim-Support'
-	" Plug 'pangloss/vim-javascript'
-	Plug 'kien/ctrlp.vim'
-	" Plug 'me-vlad/spellfiles.vim'
-	" Plug 'tmhedberg/matchit'
-	" Plug 'alvan/vim-closetag'
- 	Plug 'cakebaker/scss-syntax.vim'
-	" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
-	Plug 'ryanoasis/vim-devicons'
-	Plug 'maksimr/vim-jsbeautify'
-call plug#end()
-
-" TEMPORARY OPRIONS, LATER SHOULD BE TRANSMITED TO THE RIGHT PLACE
-set exrc
-set secure
-set path+=**
-
-" end
-
-" OPTIONS ======================================================= 
-" [https://www.shortcutfoo.com/blog/top-50-vim-configuration-options/]
-" 	Indention =================
-set autoindent
-set smartindent
-set tabstop=4
-set shiftwidth=4
-set noexpandtab
-set nosmarttab
-
-"	Search ======================
-set hlsearch
-set ignorecase
-set incsearch
-set smartcase
-
-"	Persormance =================
-set lazyredraw
-
-"	Text rendering ==============
-set display+=lastline
-set encoding=UTF-8
-set linebreak
-set scrolloff=7
-set sidescrolloff=5
-set wrap
-
-"	User interface ==============
-set laststatus=2
-set ruler
-set wildmenu
-set cursorline
-set number
-set norelativenumber
-set title
-set noerrorbells
-set novisualbell
-set mouse=a
-
-"	Code folding ================
-set foldmethod=marker
-set nofoldenable
-set foldnestmax=2
-
-"	Miscellaneous options =======
-set autoread
-set backupdir=~/.cache/vim
-set dir=~/.cache/vim
-set confirm
-set hidden
-set history=1000
-set noswapfile
-" set shell=powershell
-set spell
-
-colorscheme desert
-set encoding=UTF-8
-set guifont=Consolas:h15
-set cursorline
-
-set noshowmatch		" cursor no jumps to parent bracket
-set backspace=indent,eol,start
-
-
-" MAPPING =======================================================
-let mapleader = ","
-
-inoremap jk <esc>
-inoremap ;; <esc>:
-nnoremap q :q<cr>
-noremap <leader>q :q<cr>
-noremap <leader>x :x<cr>
-" FUNCTIONAL KEYS
-noremap <silent> <F5> :Conf<cr>
-noremap <silent> <F6> :Vimrc<cr>
-noremap <silent> <F7> :NERDTreeToggle<cr>
-noremap <silent> <F8> :TagbarToggle<cr>
-" navigation tabs/buffers
-nnoremap <leader>s <c-w>W
-nnoremap <leader>d <c-w>w
-
-nnoremap <c-j> <c-w>W
-nnoremap <c-k> <c-w>w
-nnoremap <a-h> gT
-nnoremap <a-l> gt
-nnoremap <a-j> 8j
-nnoremap <a-k> 8k
-
-nnoremap <leader>r :e %<cr>
-
-nmap <c-,> <c-y>,
-imap <c-,> <c-y>,jk
-
-nnoremap : ;
-nnoremap ; :
-vnoremap : ;
-vnoremap ; :
-
-nnoremap <leader>w :w<cr>
-inoremap <leader>w <esc>:w<cr>
-nnoremap <leader>q :q!<cr>
-nnoremap <leader>x :x<cr>
-nnoremap <a-q>u :qa!<cr>
-nnoremap <space> i<space><esc>l
-nnoremap <enter> i<enter><esc>l
-nnoremap <backspace> i<backspace><esc>l
-nnoremap vv ggVG
-nnoremap vc ggVG"+y
-
-nnoremap <leader>bt :call JsBeautify()<cr>
-
-" ABBREVIATIONS ==================================================
-iabbrev cnsl console.log( );<left><left><left>
-iabbrev <== <?= ?><left><left><left>
-
-inoremap {<cr> {<cr>}<esc>O
-inoremap {{ {<cr><cr>}<esc>o
-inoremap {<space> {  }<left><left>
-inoremap [<cr> [<cr>]<esc>O
-inoremap [[ [<cr><cr>]<esc>o
-inoremap [<space> [  ]<left><left>
-
-autocmd BufNewFile *.phtml :set filetype=html
-
-map <F5> :wall!<CR>:!sbcl --load foo.cl<CR><CR>
+source local-settings.vim
+source plugins.vim
+source vim-settings.vim
+source variables.vim
+source mappings.vim
 
 if has('nvim')
-	colorscheme dracula
-
-	autocmd vimenter * :cd ~
-	" autocmd vimenter * :NERDTree
-	autocmd vimenter * :Guifont Consolas:h14
-
-	tnoremap <a-j> <c-\><c-n><c-w>j
-	tnoremap <leader>s <c-\><c-n><c-w>h
-	tnoremap <leader>d <c-\><c-n><c-w>l
-	tnoremap <esc> <c-\><c-n>
-	tnoremap jk <c-\><c-n>
+  let g:python3_host_prog = 'C:\Program\ Files\ (x86)\Python-3.7\python'
 endif
 
-" source ~\vimscripts\
-command! Vimrc tabe ~/vim-configuration/myvimrc
-command! Conf source ~/vim-configuration/myvimrc
-command! Beautify call JsBeautify()
+if has('nvim')
+  colorscheme dracula
+  if has('win32')
+    se shell=powershell.exe
+  endif
+  autocmd VimEnter :Guifont Consolas:h15
+
+  tnoremap <a-h> <c-\><c-n>gT
+  tnoremap <a-l> <c-\><c-n>gt
+  tnoremap <leader>s <c-\><c-n><c-w>W
+  tnoremap <leader>d <c-\><c-n><c-w>w
+  tnoremap <esc> <c-\><c-n>
+  tnoremap jk <c-\><c-n>
+  tnoremap <leader>q <c-\><c-n>:q<cr>
+
+  au! TermOpen * call CustomizeAfterTermOpen()
+  au! BufEnter *powershell.exe call CustomizeAfterTermEnter()
+  au! BufLeave *powershell.exe call CustomizeAfterTermLeave()
+
+  function! CustomizeAfterTermOpen()
+    se nonumber
+    se foldcolumn=3
+    se nospell
+    syn region Search start=/PS/ end=/>/
+    start
+  endfunction
+  function! CustomizeAfterTermEnter()
+    start
+  endfunction
+  function! CustomizeAfterTermLeave()
+  endfunction
+
+  command! Vterm call OpenSideTerminal()
+  function! OpenSideTerminal()
+    exe ":vs"
+    exe "<c-w>w"
+    echo "doen"
+  endfunction
+endif
