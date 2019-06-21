@@ -1,11 +1,24 @@
-source local-settings.vim
-source plugins.vim
-source vim-settings.vim
-source variables.vim
-source mappings.vim
+source ~\vim-configuration\local-settings.vim
+source ~\vim-configuration\plugins.vim
+source ~\vim-configuration\vim-settings.vim
+source ~\vim-configuration\variables.vim
+source ~\vim-configuration\mappings.vim
+
+nnoremap <silent> <leader>aj :ALENext<cr>
+nnoremap <silent> <leader>ak :ALEPrevious<cr>
+if has('gui_running')
+  colorscheme dracula
+  se guioptions -=m
+  se guioptions -=T
+  se guioptions -=r
+  se guioptions -=R
+  se guioptions -=l
+  se guioptions -=L
+  se guioptions +=c
+endif
 
 if has('nvim')
-  let g:python3_host_prog = 'C:\Program\ Files\ (x86)\Python-3.7\python'
+  " let g:python3_host_prog = 'C:\Program\ Files\ (x86)\Python-3.7\python'
 endif
 
 if has('nvim')
