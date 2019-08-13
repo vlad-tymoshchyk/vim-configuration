@@ -1,106 +1,50 @@
-"
-" plugins "
-"
 call plug#begin('~/.vim/plugged')
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'scrooloose/nerdcommenter'
+Plug 'dracula/vim'
+Plug 'prettier/vim-prettier'
+Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-surround'
-
-Plug 'jceb/vim-orgmode'
-" Plug 'jistr/vim-nerdtree-tabs'
-Plug 'majutsushi/tagbar'
-Plug 'vim-airline/vim-airline'
-" Plug 'NLKNguyen/copy-cut-paste.vim'
-Plug 'junegunn/fzf.vim'
-Plug 'itchyny/lightline.vim'
-" Plug 'terryma/vim-multiple-cursors'
-" Plug 'danro/rename.vim'
-" Plug 'editorconfig/editorconfig-vim'
-Plug 'mattn/emmet-vim'
-" Plug 'w0rp/ale'
-" Plug 'vim-gitgutter'
-" Plug 'vim-scripts/Vim-Support'
-" Plug 'pangloss/vim-javascript'
-Plug 'kien/ctrlp.vim'
-" Plug 'me-vlad/spellfiles.vim'
-" Plug 'tmhedberg/matchit'
-" Plug 'alvan/vim-closetag'
-Plug 'cakebaker/scss-syntax.vim'
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
-Plug 'ryanoasis/vim-devicons'
-Plug 'maksimr/vim-jsbeautify'
-
-
-
+Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'wellle/targets.vim'
-" Plug 'jistr/vim-nerdtree-tabs'
-Plug 'majutsushi/tagbar'
-"Plug 'vim-airline/vim-airline'
-" Plug 'NLKNguyen/copy-cut-paste.vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'easymotion/vim-easymotion'
+Plug 'sheerun/vim-polyglot'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'PProvost/vim-ps1'
+Plug 'SirVer/ultisnips'
+" Plug 'Valloric/YouCompleteMe', { 'do': 'python install.py --tern-completer' }
+Plug 'Yggdroot/indentLine'
+Plug 'airblade/vim-gitgutter'
+Plug 'alvan/vim-closetag'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'digitaltoad/vim-pug'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'honza/vim-snippets'
+Plug 'itchyny/lightline.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'itchyny/lightline.vim'
-" Plug 'terryma/vim-multiple-cursors'
-" Plug 'danro/rename.vim'
-Plug 'w0rp/ale'
-Plug 'airblade/vim-gitgutter'
-" Plug 'vim-scripts/Vim-Support'
-Plug 'kien/ctrlp.vim'
-" Plug 'me-vlad/spellfiles.vim'
-" Plug 'tmhedberg/matchit'
-Plug 'Valloric/YouCompleteMe', { 'do': 'python install.py --tern-completer' }
-Plug 'ryanoasis/vim-devicons'
-Plug 'maksimr/vim-jsbeautify'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'morhetz/gruvbox'
-Plug 'Valloric/MatchTagAlways'
-" Plug 'vim-syntastic/syntastic'
-"
-" PLUGINS AS UTILS
-Plug 'jiangmiao/auto-pairs'
-Plug 'alvan/vim-closetag'
-Plug 'tpope/vim-surround'
-Plug 'scrooloose/nerdcommenter'
-Plug 'mattn/emmet-vim'
-
-" PLUGINS FOR SYNTAX
 Plug 'leafgarland/typescript-vim'
-Plug 'digitaltoad/vim-pug'
-Plug 'othree/html5.vim'
-Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'Yggdroot/indentLine'
-let g:indentLine_enabled = 0
-Plug 'joshdick/onedark.vim'
-Plug 'ternjs/tern_for_vim'
-" if has('nvim')
-"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" else
-" Plug 'Shougo/deoplete.nvim'
-" Plug 'roxma/nvim-yarp'
-" Plug 'roxma/vim-hug-neovim-rpc'
-" endif
-" let g:deoplete#enable_at_startup = 1
-" Plug 'Shougo/neosnippet.vim'
-" Plug 'Shougo/neosnippet-snippets'
-Plug 'dracula/vim'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-
-" snippets
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-" Plug 'garbas/vim-snipmate'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'easymotion/vim-easymotion'
+Plug 'majutsushi/tagbar'
+Plug 'maksimr/vim-jsbeautify'
+Plug 'mattn/emmet-vim'
 Plug 'michaeljsmith/vim-indent-object'
-
-" Plug 'vlad-tymoshchyk/vlad-tymoshchyk-vim-plugin'
-Plug '~/vim-configuration/vlad-tymoshchyk/vlad-tymoshchyk-vim-plugin'
+Plug 'morhetz/gruvbox'
+Plug 'mxw/vim-jsx'
+Plug 'othree/html5.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'rhysd/vim-clang-format'
+" Plug 'ternjs/tern_for_vim'
+Plug 'tomtom/tlib_vim'
+Plug 'vim-airline/vim-airline'
+Plug 'w0rp/ale'
+Plug 'wellle/targets.vim'
+Plug 'sjl/gundo.vim'
 
 call plug#end()
+
+let g:indentLine_enabled = 0
 
 
 "
@@ -277,21 +221,21 @@ let g:NERDDefaultAlign = 'left'
 
 " YouCompleteMe
 let g:ycm_key_list_stop_completion = "<esc>"
-let g:ycm_key_list_select_completion = ["<Tab>"]
+let g:ycm_key_list_select_completion = ["<leader><Tab>"]
 
 "UltiSnips
-let g:UltiSnipsExpandTrigger = "<leader><Tab>"
+let g:UltiSnipsExpandTrigger = "<Tab>"
 let g:UltiSnipsJumpForwardTrigger = "<Tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
 
 " FZF
-let $FZF_DEFAULT_COMMAND = "fd --type f"
+let $FZF_DEFAULT_COMMAND = "fd --hidden --type f --exclude .git"
 
 let g:snipMate = {}
 let g:snipMate.override = 1
 
 " vim-closetag
-let g:closetag_filenames = '*.html,*.js'
+" let g:closetag_filenames = '*.html,*.js,*.jsx'
 
 let g:mkdp_preview_options = {
       \   'maid': {
@@ -325,6 +269,7 @@ vnoremap ; :
 nnoremap vv ggVG
 
 " FUNCTIONAL KEYS
+noremap <silent> <F6> :GundoToggle<cr>
 noremap <silent> <F7> :NERDTreeToggle<cr>
 noremap <silent> <F8> :TagbarToggle<cr>
 
@@ -337,10 +282,8 @@ nnoremap <enter> i<enter><esc>l
 nnoremap <backspace> i<backspace><esc>l
 
 inoremap {<cr> {<cr>}<esc>O
-inoremap {{ {<cr><cr>}<esc>o
 inoremap {<space> {  }<left><left>
 inoremap [<cr> [<cr>]<esc>O
-inoremap [[ [<cr><cr>]<esc>o
 inoremap [<space> [  ]<left><left>
 
 " easy-motion configs
@@ -432,7 +375,7 @@ if has('gui_running')
   tnoremap <a-l> <c-\><c-n>gt
   tnoremap <leader>s <c-\><c-n><c-w>W
   tnoremap <leader>d <c-\><c-n><c-w>w
-  tnoremap <esc> <c-\><c-n>
+  " tnoremap <esc> <c-\><c-n>
   tnoremap jk <c-\><c-n>
   tnoremap <leader>q <c-\><c-n>:q<cr>
 endif
@@ -448,7 +391,7 @@ if has('nvim')
   tnoremap <a-l> <c-\><c-n>gt
   tnoremap <leader>s <c-\><c-n><c-w>W
   tnoremap <leader>d <c-\><c-n><c-w>w
-  tnoremap <esc> <c-\><c-n>
+  " tnoremap <esc> <c-\><c-n>
   tnoremap jk <c-\><c-n>
   tnoremap <leader>q <c-\><c-n>:q<cr>
 
@@ -476,3 +419,18 @@ if has('nvim')
     echo "doen"
   endfunction
 endif
+
+command! Delete call delete(expand('%')) | bdelete!
+hi CursorLine ctermbg=232
+
+se grepprg=ack\ --nogroup\ $*
+se grepformat=%f:%l:%c:%m
+
+se fileformat=unix
+
+inoremap ;w <esc>:w<cr>
+
+nnoremap <F1> :se ft=javascript.jsx<cr>
+nnoremap <F2> :se ft=jsx<cr>
+inoremap <F1> <esc>:se ft=javascript.jsx<cr>a
+inoremap <F2> <esc>:se ft=jsx<cr>a
